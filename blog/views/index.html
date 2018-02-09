@@ -9,12 +9,22 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav>
+    <nav class="clearfix">
         <span>推荐</span>
         <span>下载</span>
-        <a href="/login" id="login">登录</a>
-        <a href="/register" id="register">注册</a>
-        <!--<div class="user"><i class="fa fa-user-circle-o"></i></div>-->
+        <div class="lo-re hide">
+            <a href="/login" id="login">登录</a>
+            <a href="/register" id="register">注册</a>
+        </div>
+        <div class="user show"><i class="fa fa-user-circle-o"></i> &nbsp;username
+            <div class="operating hide">
+                    <ul>
+                        <li class="personal-center">个人中心</li>
+                        <li>退出登录</li>
+                    </ul>
+                </div>
+        </div>
+        
     </nav>
     <div class="container">
         <div class="head clearfix">

@@ -4,5 +4,7 @@ var User = require('../../operation/user');
 router.post('/register',function(req,res){
     User(req,res);
 });
-
+router.post('/login',function(req,res){
+    User(req,res);
+})
 module.exports = router;

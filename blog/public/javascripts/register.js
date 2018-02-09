@@ -1,3 +1,5 @@
+
+
 $(function () {
     $(".login").click(function () {
         window.location.href = '/login';
@@ -12,7 +14,7 @@ $(function () {
         else{
             var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%+\\s+]");
             if(pattern.test(username)){
-                alert("请输入正确的用户名");
+                $(".error").removeClass("hide").addClass("show");
                 return;
             }else{
                 $.ajax({
@@ -25,9 +27,18 @@ $(function () {
                     },
                     success:function(data){
                         console.log(data);
+                        if(data == "success"){
+                            alert("注册成功！即将跳转!");
+                            var timer = setTimeout(function(){
+                                window.location.href = '\login';
+                            },500);
+                        }
+                       else if(data == "failed"){
+                           alert("用户名已经存在");
+                       }
                     },
-                    error:function(){
-
+                    error:function(err){
+                        console.log(err);
                     }
                 })
             }

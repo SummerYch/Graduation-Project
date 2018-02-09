@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>个人中心</title>
-    <link rel="stylesheet" href="../public/stylesheets/base.css">
-    <link rel="stylesheet" href="../public/stylesheets/public.css">
-    <link rel="stylesheet" href="../public/stylesheets/personal_center.css">
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/public.css">
+    <link rel="stylesheet" href="stylesheets/personal_center.css">
 </head>
 <body>
     <nav>
+        <div class="user show"><i class="fa fa-user-circle-o"></i> &nbsp;username
+            <div class="operating">
+                    <ul>
+                        <li class="personal-center">个人中心</li>
+                        <li>退出登录</li>
+                    </ul>
+                </div>
+        </div>
     </nav>
     <div class="container">
         <div class="top clearfix">
@@ -20,7 +28,7 @@
                 </div>
             </div>
             <div class="person-info">
-                <a href="#" class="edit-a">编辑</a>
+                <div href="" class="edit-a">编辑</div>
                 <p class="nickname">风吹过的春夏秋冬</p>
                 <p class="info">
                     <!--<span class="industry">未填写行业</span>-->
@@ -77,7 +85,7 @@
             </form>
         </div>
     </div>
-    <script src="../public/javascripts/plugins/jquery-1.11.1.min.js"></script>
-    <script src="../public/javascripts/personal_center.js"></script>
+    <script src="javascripts/plugins/jquery-1.11.1.min.js"></script>
+    <script src="javascripts/personal_center.js"></script>
 </body>
 </html>

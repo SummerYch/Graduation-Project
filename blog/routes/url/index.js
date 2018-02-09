@@ -16,4 +16,9 @@ router.get('/login', function (req, res) {
         title: 'login'
     });
 })
+router.get('/personalCenter',function(req,res){
+    res.render('personal_center',{
+        title:'personal_center'
+    });
+})
 module.exports = router;

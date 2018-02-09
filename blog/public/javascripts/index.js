@@ -7,5 +7,13 @@ $(function () {
         var fn = this.className.split(' ')[1];
         data[fn]();
     });
-    
+    $(".personal-center").click(function(){
+        window.location.href = '/personalCenter';
+    });
+    $('.user').mouseenter(function(){
+        $('.operating').fadeIn();
+    });
+    $('.user').mouseleave(function(){
+        $('.operating').fadeOut();
+    });
 })

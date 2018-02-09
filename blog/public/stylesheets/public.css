@@ -16,6 +16,41 @@ nav {
   background: #eaebec;
   box-sizing: border-box;
 }
+/* nav{ */
+  /* position: relative; */
+/* } */
+nav .user{
+  position: relative;
+  margin-right:50px;
+  float: right;
+  cursor: pointer;
+}
+nav .operating{
+  position: absolute;
+  right:-30px;
+  top:40px;
+  background: #fff;
+  width: 140px;
+  z-index: 999;
+  box-shadow: 0 0 10px #5d5d5d;
+}
+nav .operating ul{
+  width: 80%;
+  margin: 0 auto;
+}
+nav .operating ul li{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+nav .operating ul li:hover{
+  background: red;
+  color:white;
+}
 nav span {
   cursor: pointer;
 }

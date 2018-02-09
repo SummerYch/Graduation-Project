@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/register',index);
 app.use('/login',index);
-
+app.use('/personalCenter',index);
 //api
 app.use('/user',user);
 
