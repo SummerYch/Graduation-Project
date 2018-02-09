@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../public/stylesheets/base.css">
+    <link rel="stylesheet" href="../public/stylesheets/public.css">
+    <link rel="stylesheet" href="../public/stylesheets/personal_center.css">
+</head>
+<body>
+    <nav>
+    </nav>
+    <div class="container">
+        <div class="top clearfix">
+            <div class="person-photo">
+                <div class="img"></div>
+                <div class="attention clearfix">
+                    <div class="left"><span>0</span><p>关注</p></div>
+                    <div class="right"><span>0</span><p>粉丝</p></div>
+                </div>
+            </div>
+            <div class="person-info">
+                <a href="#" class="edit-a">编辑</a>
+                <p class="nickname">风吹过的春夏秋冬</p>
+                <p class="info">
+                    <!--<span class="industry">未填写行业</span>-->
+                    <span class="occupation">未填写职业</span>
+                    <span class="name">未填写姓名</span>
+                    <span class="country">未填写国籍</span>
+                    <span class="sex">未填写性别</span>
+                    <span class="birthday">未填写生日</span>
+                </p>
+                <p class="self-intro">个人简介</p>
+                <p class="self-intro-con"></p>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="title">
+                <ul>
+                    <li class="active">我的关注<p>1</p></li>
+                    <li class="active-o">我的文章<p>2</p></li>
+                    <li class="active-o">我的资源<p>3</p></li>
+                    <li class="active-o">我收藏的文章<p>4</p></li>
+                    <li class="active-o">我收藏的资源<p>5</p></li>
+                    <li class="active-o">我下载的资源<p>6</p></li>
+                </ul>
+            </div>
+            <!--列表内容显示-->
+            <div class="content">
+                <div class="con1 show">
+                    1
+                </div>
+                <div class="con2 hide">2</div>
+                <div class="con3 hide">3</div>
+                <div class="con4 hide">4</div>
+                <div class="con5 hide">5</div>
+                <div class="con6 hide">6</div>
+            </div>
+        </div>
+    </div>
+    <!--模态框-->
+    <div class="mask">
+        <div class="edit">
+            <p class="x">X</p>
+            <form>
+                <input type="text" placeholder="请填写职业" class="oc-source"><br>
+                <input type="text" placeholder="请填写姓名" class="na-source"><br>
+                <input type="text" placeholder="请填写国籍" class="co-source"><br>
+                <label for="">请选择性别:</label>
+                <input type="radio" name="sex" class="se-source" value="boy" checked="checked">男
+                <input type="radio" name="sex" class="se-source" value="girl">女<br><br>
+                <p>请输入出生日期:</p>
+                <input type="date" id="birth" class="bi-source"><br><br>
+                <p>请输入自我简介:</p>
+                <textarea name="self-intro" id="self-intro" cols="30" rows="10"></textarea>
+                <button id="submit" type="button">保存</button>
+            </form>
+        </div>
+    </div>
+    <script src="../public/javascripts/plugins/jquery-1.11.1.min.js"></script>
+    <script src="../public/javascripts/personal_center.js"></script>
+</body>
+</html>
