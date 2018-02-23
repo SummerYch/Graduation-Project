@@ -21,11 +21,5 @@ $(function () {
     $(".personal-center").click(function(){
         window.location.href = '/personalCenter?userid='+userId+'&username='+username;
     });
-    $('.user').mouseenter(function(){
-        $('.operating').fadeIn();
-    });
-    $('.user').mouseleave(function(){
-        $('.operating').fadeOut();
-    });
 })
 

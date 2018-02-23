@@ -13,12 +13,12 @@ function clickEvents() {
             box.siblings().removeClass("show").addClass("hide");
         })
     });
-    $(".write").click(function(){
-        $(".left ul li:eq(0)").addClass("active");
-        $(".left ul li:eq(0)").siblings().removeClass("active");
-        $(".box1").removeClass("hide").addClass("show");
-        $(".box1").siblings().removeClass("show").addClass("hide");
-    })
+    // $(".write").click(function(){
+    //     $(".left ul li:eq(0)").addClass("active");
+    //     $(".left ul li:eq(0)").siblings().removeClass("active");
+    //     $(".box1").removeClass("hide").addClass("show");
+    //     $(".box1").siblings().removeClass("show").addClass("hide");
+    // })
     $(".manage p").each(function () {
         $(this).click(function () {
             var className = $(this).attr("value");

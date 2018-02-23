@@ -61,6 +61,10 @@ nav a {
   margin-left: 20px;
   float: right;
 }
+nav .logo{
+  float:left;
+  cursor: pointer;
+}
 .hide {
   display: none;
 }

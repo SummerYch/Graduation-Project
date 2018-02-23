@@ -8,7 +8,10 @@ function User(req, res) {
         login(req, res);
     }
     if (req.body.action === 'user_info') {
-        userInfo(req,res);
+        userInfo(req, res);
+    }
+    if (req.body.action === 'getUserInfo') {
+        getUserInfo(req,res);
     }
 }
 // 注册
@@ -84,6 +87,7 @@ function login(req, res) {
         });
     }, 'blog');
 }
+//录入用户信息
 function userInfo(req, res) {
     var userid = req.body.userid;
     var occupation = req.body.occupation;
@@ -100,36 +104,58 @@ function userInfo(req, res) {
                 return;
             }
             // rows 是查询结果
-            if(rows.length == 0){
+            if (rows.length == 0) {
                 console.log("用户第一次编辑个人信息");
                 db(function (con) {
-                    var sql = 'insert into user_info(userid,occupation,name,country,sex,birthday,self_intro)'
-                    +' values(\''+userid+'\',\''+occupation+'\',\''+name+'\',\''+country+'\',\''+sex+'\',\''+birthday+'\',\''+self_intro+'\');';
+                    // var sql = 'insert into user_info(userid,occupation,name,country,sex,birthday,self-intro) values(\''+userid+'\',\''+occupation+'\',\''+name+'\',\''+country+'\',\''+sex+'\',\''+birthday+'\',\''+self_intro+'\');';
+                    var sql = 'insert into user_info(userid,occupation,name,country,sex,birthday,self_intro) values (\'' + userid + '\',\'' + occupation + '\',\'' + name + '\',\'' + country + '\',\'' + sex + '\',\'' + birthday + '\',\'' + self_intro + '\');';
                     con.query(sql, function (err, rows) {
                         if (err) {
                             console.log(err);
+                            res.send("failed");
                             return;
                         }
                         // rows 是查询结果
                         console.log(rows);
+                        res.send("success");
                     });
                 }, 'blog');
+                return;
             }
-            else if(rows.length !== 0){
+            else if (rows.length !== 0) {
                 console.log("用户修改个人信息");
                 db(function (con) {
-                    var sql = 'update user_info set occupation=\''+occupation+'\',name=\''+name+'\',country=\''+country+'\','
-                    +'sex=\''+sex+'\',birthday=\''+birthday+'\',self_intro=\''+self_intro+'\';';
+                    var sql = 'update user_info set occupation=\'' + occupation + '\',name=\'' + name + '\',country=\'' + country + '\','
+                        + 'sex=\'' + sex + '\',birthday=\'' + birthday + '\',self_intro=\'' + self_intro + '\' where userid=' + userid + ';';
                     con.query(sql, function (err, rows) {
                         if (err) {
                             console.log(err);
+                            res.send("failed");
                             return;
                         }
                         // rows 是查询结果
                         console.log(rows);
+                        res.send("success");
                     });
                 }, 'blog');
             }
+        });
+    }, 'blog');
+}
+//获取用户信息
+function getUserInfo(req, res) {
+    console.log("now at getUserInfo");
+    var userid = req.body.userid;
+    db(function (con) {
+        var sql = 'select * from user_info where userid=\''+userid+'\';';
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            // rows 是查询结果
+            console.log(rows);
+            res.send(rows[0]);
         });
     }, 'blog');
 }

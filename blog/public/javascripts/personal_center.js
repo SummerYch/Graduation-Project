@@ -1,14 +1,4 @@
 $(function(){
-    // 个人中心显示隐藏
-    $(".personal-center").click(function(){
-        window.location.href = '/personalCenter?userid='+userId+'&username='+username;
-    });
-    $('.user').mouseenter(function(){
-        $('.operating').fadeIn();
-    });
-    $('.user').mouseleave(function(){
-        $('.operating').fadeOut();
-    });
      // 获取 url中参数
      var userId = getUrlParameter("userid");
      var username = getUrlParameter("username");
@@ -32,7 +22,6 @@ $(function(){
     });
     // 保存信息
     $("#submit").click(function () {
-        console.log(userId);
         if($(".oc-source").val()=="" || $(".na-source").val()=="" || $(".co-source").val()=="" || $(".bi-source").val()=="" || $("#self-intro").val()==""){
             alert("请填写相关信息");
             return;
@@ -52,27 +41,46 @@ $(function(){
             birthday:birthday,
             self_intro:self_intro,
             action:"user_info"
-        }
+        };
         $.ajax({
             url:"/user/user_info",
             type:"post",
             data:data,
             success:function(data){
-
+                console.log(data);
+                if(data == "success"){
+                    alert("修改信息成功");
+                    $(".mask").slideUp();
+                }
+                else if(data == "failed"){
+                    alert("修改信息失败");
+                }
+                
             },
             error:function(err){
                 console.log(err);
             }
         })
-        // 把数据保存在数据库中，再从数据库中获取显示到前台
-        // $(".occupation").html(occupation);
-        // $(".name").html(name);
-        // $(".country").html(country);
-        // $(".sex").html(sex);
-        // $(".birthday").html(birthday);
-        // $(".self-intro").html(self_intro);
-        // $(".mask").css({
-        //     display:"none"
-        // });
     });
+    //info下的span显示信息
+    $.ajax({
+        url:"/user/getUserInfo",
+        type:"post",
+        data:{
+            userid:userId,
+            action:"getUserInfo"
+        },
+        success:function(data){
+            console.log(data);
+            $(".occupation").html(data.occupation);
+            $(".name").html(data.name);
+            $(".country").html(data.country);
+            $(".sex").html(data.sex);
+            $(".birthday").html(data.birthday);
+            $(".self-intro").html(data.self_intro);
+        },
+        error:function(err){
+            console.log(err);
+        }
+    })
 })

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>index</title>
@@ -8,32 +9,48 @@
     <link rel="stylesheet" href="stylesheets/index.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="clearfix">
+        <div class="logo"><img src="images/yearlogo2.png" alt=""></div>
         <span>推荐</span>
         <span>下载</span>
         <div class="lo-re show">
             <a href="/login" id="login">登录</a>
             <a href="/register" id="register">注册</a>
         </div>
-        <div class="user hide"><i class="fa fa-user-circle-o"></i> &nbsp;<span>username</span>
+        <div class="user hide">
+            <i class="fa fa-user-circle-o"></i> &nbsp;
+            <span>username</span>
             <div class="operating hide">
-                    <ul>
-                        <li class="personal-center">个人中心</li>
-                        <li>退出登录</li>
-                    </ul>
-                </div>
+                <ul>
+                    <li class="personal-center">个人中心</li>
+                    <li class="writeblog">写博客</li>
+                    <li>退出登录</li>
+                </ul>
+            </div>
         </div>
-        
     </nav>
     <div class="container">
         <div class="head clearfix">
             <div class="carousel">
                 <ul class="clearfix">
-                    <li><img src="images/carousel1.png" alt=""><div class="mask">程序员面试谈薪资的6大技巧</div></li>
-                    <li><img src="images/carousel2.jpg" alt=""><div class="mask">构建多CPU支持的Docker镜像</div></li>
-                    <li><img src="images/carousel3.jpg" alt=""><div class="mask">Presslabs从研究到生产的Kubernetes之旅</div></li>
-                    <li><img src="images/carousel4.png" alt=""><div class="mask">出门问问李志飞：小米让别人无路可走</div></li>
+                    <li>
+                        <img src="images/carousel1.png" alt="">
+                        <div class="mask">程序员面试谈薪资的6大技巧</div>
+                    </li>
+                    <li>
+                        <img src="images/carousel2.jpg" alt="">
+                        <div class="mask">构建多CPU支持的Docker镜像</div>
+                    </li>
+                    <li>
+                        <img src="images/carousel3.jpg" alt="">
+                        <div class="mask">Presslabs从研究到生产的Kubernetes之旅</div>
+                    </li>
+                    <li>
+                        <img src="images/carousel4.png" alt="">
+                        <div class="mask">出门问问李志飞：小米让别人无路可走</div>
+                    </li>
                 </ul>
                 <a href="javascript:void(0);" class="unslider-arrow04 prev">
                     <img class="arrow" id="al" src="images/arrowl.png" alt="prev" width="20" height="35">
@@ -62,4 +79,5 @@
     <script src="javascripts/public.js"></script>
     <script src="javascripts/index.js"></script>
 </body>
+
 </html>

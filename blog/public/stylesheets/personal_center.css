@@ -2,7 +2,7 @@ body {
   position: relative;
 }
 .mask {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
@@ -38,7 +38,7 @@ body {
   padding: 20px 0;
 }
 .mask .edit form input {
-  margin-top: 10px;
+  margin-top: 2px;
 }
 .mask .edit form input[type="text"],
 .mask .edit form input[type="date"] {
@@ -136,7 +136,6 @@ body {
   text-align: center;
   color: #e9733a;
   border-right: 2px solid #9C9C9C;
-  cursor: pointer;
   box-sizing: border-box;
 }
 .top .person-info .info span:last-child {

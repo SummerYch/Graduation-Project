@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>文章管理</title>
-    <link rel="stylesheet" href="../public/stylesheets/base.css">
-    <link rel="stylesheet" href="../public/stylesheets/public.css">
-    <link rel="stylesheet" href="../public/stylesheets/article_manage.css">
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/public.css">
+    <link rel="stylesheet" href="stylesheets/article_manage.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <nav class="clearfix">
-        <div class="user">此处放用户</div>
-        <div class="write"><i class="fa fa-pencil-square-o"></i>写博客</div>
+        <div class="logo"><img src="images/yearlogo2.png" alt=""></div>
+        <div class="user">
+            <i class="fa fa-user-circle-o"></i> &nbsp;
+            <span>username</span>
+            <div class="operating hide">
+                <ul>
+                    <li class="personal-center">个人中心</li>
+                    <li class="writeblog">写博客</li>
+                    <li>退出登录</li>
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="write"><i class="fa fa-pencil-square-o"></i>写博客</div> -->
     </nav>
 <div class="container clearfix">
     <div class="left">
@@ -26,6 +37,7 @@
         <div class="write-blog box1 hide">
             <input type="text" placeholder="请输入标题" id="article-title">
             <textarea name="article" id="article" cols="30" rows="10"></textarea>
+            <button>提交</button>
         </div>
         <div class="manage-blog box2 show">
             <p class="box-title">文章管理</p>
@@ -61,6 +73,7 @@
             </div>
             <!--文章管理四个盒子结束-->
         </div>
+
         <div class="manage-comment box3 hide">
             <p class="box-title">评论管理</p>
             <div class="manage clearfix">
@@ -82,6 +95,7 @@
             </div>
             <!--评论管理下两个盒子结束-->
         </div>
+
         <div class="manage-source box4 hide">
             <p class="box-title">资源管理</p>
             <div class="manage clearfix">
@@ -112,7 +126,8 @@
     </div>
 </div>
 
-    <script src="../public/javascripts/plugins/jquery-1.11.1.min.js"></script>
-    <script src="../public/javascripts/article_management.js"></script>
+    <script src="javascripts/plugins/jquery-1.11.1.min.js"></script>
+    <script src="javascripts/public.js"></script>
+    <script src="javascripts/article_management.js"></script>
 </body>
 </html>

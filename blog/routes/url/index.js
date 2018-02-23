@@ -21,4 +21,9 @@ router.get('/personalCenter',function(req,res){
         title:'personal_center'
     });
 })
+router.get('/articleManagement',function(req,res){
+    res.render('aiticle_management',{
+        title:'aiticle_management'
+    });
+})
 module.exports = router;
