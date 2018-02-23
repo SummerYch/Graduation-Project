@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  width: 1200px;
+  margin: 10px auto;
+  /* border: 1px solid red; */
+}
+.container .carousel {
+  position: relative;
+  width: 720px;
+  float: left;
+  overflow: hidden;
+  text-align: center;
+}
+.container .carousel ul {
+  width: 400%;
+  height: 391px;
+  overflow: hidden;
+}
+.container .carousel ul li {
+  position: relative;
+  width: 25%;
+  list-style: none;
+  float: left;
+}
+.container .carousel ul li img {
+  width: 100%;
+}
+.container .carousel .arrow {
+  position: absolute;
+  top: 200px;
+  width: 20px;
+  height: 35px;
+}
+.container .carousel #al {
+  left: 15px;
+}
+.container .carousel #ar {
+  right: 15px;
+}
+.container .carousel .dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+}
+.container .carousel .dots li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 4px;
+  text-indent: -999em;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: .4;
+  -webkit-transition: background .5s, opacity .5s;
+  -moz-transition: background .5s, opacity .5s;
+  transition: background .5s, opacity .5s;
+}
+.container .carousel .dots li.active {
+  background: #fff;
+  opacity: 1;
+}
+.container .carousel .mask {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 92px;
+  color: white;
+  padding-top: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+.container .right {
+  width: 39%;
+  margin-left: 5px;
+  float: left;
+}
+.container .right .img {
+  position: relative;
+  width: 100%;
+}
+.container .right .img img {
+  width: 100%;
+  height: 192px;
+}
+.container .right .img .mask {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  color: white;
+  background: rgba(0, 0, 0, 0.35);
+}
+.container .right .img:nth-child(2) {
+  margin-top: 5px;
+}
+.container .recommend {
+  width: 1200px;
+  height: 20px;
+  margin-top: 20px;
+  /* border: 1px solid red; */
+}
