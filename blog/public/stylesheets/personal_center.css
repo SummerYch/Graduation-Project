@@ -1,0 +1,197 @@
+body {
+  position: relative;
+}
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 618px;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+.mask .edit {
+  position: relative;
+  width: 720px;
+  height: 578px;
+  margin: 10px auto;
+  border-radius: 5px;
+  background: #fff;
+  overflow: hidden;
+}
+.mask .edit .x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.mask .edit .x:hover {
+  background: red;
+  color: white;
+}
+.mask .edit form {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.mask .edit form input {
+  margin-top: 10px;
+}
+.mask .edit form input[type="text"],
+.mask .edit form input[type="date"] {
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #8d8d8d;
+  box-sizing: border-box;
+}
+.mask .edit form button {
+  width: 100px;
+  height: 40px;
+  margin-top: 10px;
+  color: white;
+  border-radius: 5px;
+  background: #429c8b;
+  cursor: pointer;
+}
+.mask .edit form #self-intro {
+  width: 100%;
+  height: 150px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: 1px solid #CBCBCB;
+  box-sizing: border-box;
+}
+.top {
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+}
+.top .person-photo {
+  width: 200px;
+  height: 250px;
+  margin: 10px;
+  overflow: hidden;
+  float: left;
+}
+.top .person-photo .img {
+  width: 160px;
+  height: 160px;
+  border: 1px solid red;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.top .person-photo .attention {
+  padding-left: 20px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.top .person-photo .attention .left {
+  width: 40%;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  float: left;
+}
+.top .person-photo .attention .right {
+  width: 40%;
+  text-align: center;
+  float: left;
+}
+.top .person-photo .attention span {
+  font-size: 22px;
+  font-weight: 700;
+}
+.top .person-info {
+  position: relative;
+  width: 800px;
+  height: 250px;
+  margin-left: 20px;
+  float: left;
+}
+.top .person-info .edit-a {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.top .person-info .nickname {
+  margin-top: 20px;
+  font-size: 26px;
+  font-family: "Adobe 黑体 Std R";
+}
+.top .person-info .info {
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #CBCBCB;
+}
+.top .person-info .info span {
+  display: inline-block;
+  width: 19%;
+  padding: 0 20px;
+  text-align: center;
+  color: #e9733a;
+  border-right: 2px solid #9C9C9C;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.top .person-info .info span:last-child {
+  border-right: none;
+}
+.top .person-info .self-intro {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #CBCBCB;
+}
+.bottom {
+  width: 100%;
+  background: #fff;
+  margin-top: 20px;
+  overflow: hidden;
+}
+.bottom .title {
+  width: 100%;
+  float: left;
+}
+.bottom .title ul {
+  width: 100%;
+}
+.bottom .title ul li {
+  width: 25%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  /* padding: 20px auto; */
+  box-sizing: border-box;
+  float: left;
+  cursor: pointer;
+}
+.bottom .title ul li p {
+  display: none;
+}
+.bottom .active-o {
+  background: #eeeeee;
+}
+.bottom .active {
+  border-top: 2px solid #8d8d8d;
+  background: #fff;
+}
+.bottom .content {
+  width: 100%;
+  float: left;
+}
+.bottom .content div {
+  width: 100%;
+  height: 100px;
+  background: #fff;
+}
+.bottom .content .show {
+  display: block;
+}
+.bottom .content .hide {
+  display: none;
+}
