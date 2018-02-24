@@ -1,5 +1,14 @@
 $(function () {
     clickEvents();
+     //写博客
+     $(".article-submit").click(function () {
+        var articleTitle = $("#article-title").val();
+        var article = $("#article").val();
+        console.log(article);
+        $.ajax({
+            
+        });
+    })
 });
 // li点击事件，包括相关盒子的显示隐藏，相关盒子内标题p的样式更改
 function clickEvents() {
@@ -13,12 +22,6 @@ function clickEvents() {
             box.siblings().removeClass("show").addClass("hide");
         })
     });
-    // $(".write").click(function(){
-    //     $(".left ul li:eq(0)").addClass("active");
-    //     $(".left ul li:eq(0)").siblings().removeClass("active");
-    //     $(".box1").removeClass("hide").addClass("show");
-    //     $(".box1").siblings().removeClass("show").addClass("hide");
-    // })
     $(".manage p").each(function () {
         $(this).click(function () {
             var className = $(this).attr("value");
