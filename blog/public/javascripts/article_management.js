@@ -1,14 +1,156 @@
 $(function () {
     clickEvents();
-     //写博客
-     $(".article-submit").click(function () {
+    //写博客
+    $(".article-submit").click(function () {
         var articleTitle = $("#article-title").val();
         var article = $("#article").val();
-        console.log(article);
+        var userid = getUrlParameter("userid");
+        var uploadtimeA = new Date();
+        var uploadtime = uploadtimeA.toLocaleString();
+        if (articleTitle == "" || article == "") {
+            alert("请填写相关内容");
+            return;
+        }
         $.ajax({
-            
+            url: "/article/write",
+            type: "post",
+            data: {
+                action: "writeblog",
+                articleTitle: articleTitle,
+                article: article,
+                userid: userid,
+                uploadtime: uploadtime
+            },
+            success: function (data) {
+                if(data == "success"){
+                    alert("文章提交成功，请等待审核");
+                    $("#article-title").val("");
+                    $("#article").val("");
+                }
+            },
+            error: function (err) {
+                console.log("err:");
+                console.log(err);
+            }
         });
-    })
+    });
+    //“全部列表”获取文章
+    $.ajax({
+        url:"/article/get",
+        type:"post",
+        data:{
+            action:"getArticle",
+            location:"list-all"
+        },
+        success:function(data){
+            console.log(data);
+            var length = data.length;
+            $(".all-article").html(length);
+            for(var i =0;i<data.length;i++){
+                if(data[i].status == 1){
+                    $("#allarticletable").append(" <tr>"
+                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
+                    +"<td class=\"center\">已发表</td>"
+                    +"<td class=\"center\">"
+                        +"<button class=\"edit\">编辑</button>"
+                        +"<button class=\"delete\">删除</button>"
+                    +"</td>"
+                +"</tr>");
+                }else if(data[i].status == 2){
+                    $("#allarticletable").append(" <tr>"
+                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
+                    +"<td class=\"center\">草稿箱</td>"
+                    +"<td class=\"center\">"
+                        +"<button class=\"edit\">编辑</button>"
+                        +"<button class=\"delete\">删除</button>"
+                    +"</td>"
+                +"</tr>");
+                }
+            }
+        },
+        error: function (err) {
+            console.log("err:");
+            console.log(err);
+        }
+    });
+    //“已发表”获取文章
+    $.ajax({
+        url:"/article/get",
+        type:"post",
+        data:{
+            action:"getArticle",
+            location:"list-posted"
+        },
+        success:function(data){
+            var length = data.length;
+            $(".posted").html(length);
+            for(var i =0;i<data.length;i++){
+                    $("#postedarticletable").append(" <tr>"
+                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
+                    +"<td class=\"center\">"
+                        +"<button class=\"edit\">编辑</button>"
+                        +"<button class=\"delete\">删除</button>"
+                    +"</td>"
+                +"</tr>");
+            }
+        },
+        error: function (err) {
+            console.log("err:");
+            console.log(err);
+        }
+    });
+    //“草稿箱”获取文章
+    $.ajax({
+        url:"/article/get",
+        type:"post",
+        data:{
+            action:"getArticle",
+            location:"list-drafts"
+        },
+        success:function(data){
+            var length = data.length;
+            $(".drafts").html(length);
+            for(var i =0;i<data.length;i++){
+                    $("#draftsarticletable").append(" <tr>"
+                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
+                    +"<td class=\"center\">"
+                        +"<button class=\"edit\">编辑</button>"
+                        +"<button class=\"delete\">删除</button>"
+                    +"</td>"
+                +"</tr>");
+            }
+        },
+        error: function (err) {
+            console.log("err:");
+            console.log(err);
+        }
+    });
+     //“回收站”获取文章
+     $.ajax({
+        url:"/article/get",
+        type:"post",
+        data:{
+            action:"getArticle",
+            location:"list-recycle"
+        },
+        success:function(data){
+            var length = data.length;
+            $(".recyble-bin").html(length);
+            for(var i =0;i<data.length;i++){
+                    $("#recyclearticletable").append(" <tr>"
+                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
+                    +"<td class=\"center\">"
+                        +"<button class=\"edit\">编辑</button>"
+                        +"<button class=\"delete\">删除</button>"
+                    +"</td>"
+                +"</tr>");
+            }
+        },
+        error: function (err) {
+            console.log("err:");
+            console.log(err);
+        }
+    });
 });
 // li点击事件，包括相关盒子的显示隐藏，相关盒子内标题p的样式更改
 function clickEvents() {
@@ -17,7 +159,7 @@ function clickEvents() {
             var num = $(this).attr("value");
             $(this).addClass("active");
             $(this).siblings().removeClass("active");
-            var box = $(".box"+num);
+            var box = $(".box" + num);
             box.removeClass("hide").addClass("show");
             box.siblings().removeClass("show").addClass("hide");
         })
@@ -27,9 +169,9 @@ function clickEvents() {
             var className = $(this).attr("value");
             $(this).addClass("word-active");
             $(this).siblings().removeClass("word-active");
-            var box = $(this).parent().parent().children(".box").children("."+className);
+            var box = $(this).parent().parent().children(".box").children("." + className);
             box.removeClass("hide").addClass("show");
             box.siblings().removeClass("show").addClass("hide");
         })
-    })
+    });
 }

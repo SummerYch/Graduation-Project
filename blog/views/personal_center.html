@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>个人中心</title>
@@ -8,17 +9,22 @@
     <link rel="stylesheet" href="stylesheets/personal_center.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
+
 <body>
     <nav>
-        <div class="logo"><img src="images/yearlogo2.png" alt=""></div>
-        <div class="user"><i class="fa fa-user-circle-o"></i> &nbsp;<span>username</span>
+        <div class="logo">
+            <img src="images/yearlogo2.png" alt="">
+        </div>
+        <div class="user">
+            <i class="fa fa-user-circle-o"></i> &nbsp;
+            <span>username</span>
             <div class="operating hide">
-                    <ul>
-                        <li class="personal-center">个人中心</li>
-                        <li class="writeblog">写博客</li>
-                        <li>退出登录</li>
-                    </ul>
-                </div>
+                <ul>
+                    <li class="personal-center">个人中心</li>
+                    <li class="writeblog">写博客</li>
+                    <li>退出登录</li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="container">
@@ -26,8 +32,14 @@
             <div class="person-photo">
                 <div class="img"></div>
                 <div class="attention clearfix">
-                    <div class="left"><span>0</span><p>关注</p></div>
-                    <div class="right"><span>0</span><p>粉丝</p></div>
+                    <div class="left">
+                        <span>0</span>
+                        <p>关注</p>
+                    </div>
+                    <div class="right">
+                        <span>0</span>
+                        <p>粉丝</p>
+                    </div>
                 </div>
             </div>
             <div class="person-info">
@@ -47,12 +59,20 @@
         <div class="bottom">
             <div class="title">
                 <ul>
-                    <li class="active">我的关注<p>1</p></li>
+                    <li class="active">我的关注
+                        <p>1</p>
+                    </li>
                     <!-- <li class="active-o">我的文章<p>2</p></li>
                     <li class="active-o">我的资源<p>3</p></li> -->
-                    <li class="active-o">我收藏的文章<p>4</p></li>
-                    <li class="active-o">我收藏的资源<p>5</p></li>
-                    <li class="active-o">我下载的资源<p>6</p></li>
+                    <li class="active-o">我收藏的文章
+                        <p>4</p>
+                    </li>
+                    <li class="active-o">我收藏的资源
+                        <p>5</p>
+                    </li>
+                    <li class="active-o">我下载的资源
+                        <p>6</p>
+                    </li>
                 </ul>
             </div>
             <!--列表内容显示-->
@@ -81,9 +101,13 @@
                 <input type="text" placeholder="请填写国籍" class="co-source">
                 <label for="">请选择性别:</label>
                 <input type="radio" name="sex" class="se-source" value="男" checked="checked">男
-                <input type="radio" name="sex" class="se-source" value="女">女<br><br>
+                <input type="radio" name="sex" class="se-source" value="女">女
+                <br>
+                <br>
                 <p>请输入出生日期:</p>
-                <input type="date" id="birth" class="bi-source"><br><br>
+                <input type="date" id="birth" class="bi-source">
+                <br>
+                <br>
                 <p>请输入自我简介:</p>
                 <textarea name="self-intro" id="self-intro" cols="30" rows="10"></textarea>
                 <button id="submit" type="button">保存</button>
@@ -94,4 +118,5 @@
     <script src="javascripts/public.js"></script>
     <script src="javascripts/personal_center.js"></script>
 </body>
+
 </html>

@@ -16,14 +16,14 @@ router.get('/login', function (req, res) {
         title: 'login'
     });
 })
-router.get('/personalCenter',function(req,res){
-    res.render('personal_center',{
-        title:'personal_center'
+router.get('/personalCenter', function (req, res) {
+    res.render('personal_center', {
+        title: 'personal_center'
     });
 })
-router.get('/articleManagement',function(req,res){
-    res.render('aiticle_management',{
-        title:'aiticle_management'
+router.get('/articleManagement', function (req, res) {
+    res.render('aiticle_management', {
+        title: 'aiticle_management'
     });
 })
 module.exports = router;

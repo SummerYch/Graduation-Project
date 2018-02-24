@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/url/index');
 var user = require('./routes/api/user');
+var article = require('./routes/api/article');
 var ejs = require('ejs');
 var app = express();
 
@@ -30,7 +31,7 @@ app.use('/login',index);
 app.use('/personalCenter',index);
 //api
 app.use('/user',user);
-
+app.use('/article',article);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

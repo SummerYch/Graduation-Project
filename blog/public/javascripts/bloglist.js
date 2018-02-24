@@ -8,7 +8,7 @@ function clickEvent() {
             $(this).siblings().removeClass("clicked");
             $(this).addClass("clicked");
             console.log(className);
-            var box = $(this).parent().next().children("."+className);
+            var box = $(this).parent().next().children("." + className);
             box.removeClass("hide").addClass("show");
             box.siblings().removeClass("show").addClass("hide");
         })

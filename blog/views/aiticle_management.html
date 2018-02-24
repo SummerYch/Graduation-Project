@@ -37,7 +37,10 @@
         <div class="write-blog box1 hide">
             <input type="text" placeholder="请输入标题" id="article-title">
             <textarea name="article" id="article" cols="30" rows="10"></textarea>
-            <button class="article-submit">提交</button>
+            <div>
+                <button class="article-submit">提交</button>
+                <button class="in-draft">放入草稿箱</button>
+            </div>
         </div>
         <div class="manage-blog box2 show">
             <p class="box-title">文章管理</p>
@@ -51,24 +54,37 @@
             <!--文章管理下四个标题所对应的盒子-->
             <div class="box">
                 <div class="list-all show">
-                    <ul>
-                        <li>1</li>
-                    </ul>
+                    <table class="article-table" cellspacing="0" id="allarticletable">
+                        <tr>
+                            <th>标题</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
                 </div>
                 <div class="list-posted hide">
-                    <ul>
-                        <li>2</li>
-                    </ul>
+                    <table class="article-table" cellspacing="0" id="postedarticletable">
+                        <tr>
+                            <th>标题</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
                 </div>
                 <div class="list-drafts hide">
-                    <ul>
-                        <li>3</li>
-                    </ul>
+                    <table class="article-table" cellspacing="0" id="draftsarticletable">
+                        <tr>
+                            <th>标题</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
                 </div>
                 <div class="list-recycle hide">
-                    <ul>
-                        <li>4</li>
-                    </ul>
+                    <table class="article-table" cellspacing="0" id="recyclearticletable">
+                        <tr>
+                            <th>标题</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!--文章管理四个盒子结束-->

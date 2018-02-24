@@ -52,8 +52,8 @@
     border: 1px solid #ddd;
 }
 .write-blog button{
-    display: block;
     margin-top: 20px;
+    margin-left:20px;
     width: 100px;
     height: 40px;
     border-radius: 5px;
@@ -71,10 +71,56 @@
     float: left;
     cursor: pointer;
 }
+.manage .int{
+    margin: 10px 0 0 10px;
+    padding: 5px 0 5px 5px;
+    border:1px solid #ddd;
+    background: #b9b5ae;
+    float: left;
+}
+.manage .int .searchIcon{
+    color: white;
+    cursor: pointer;
+}
+.manage .int input{
+    background: #b9b5ae;
+}
 .word-active{
     color: black !important;
     border-bottom:3px solid #C92027;
 }
-
-
+.article-table{
+    width: 100%;
+    border: 2px solid #0c799a;
+}
+.article-table tr{
+    width:100%;
+}
+.article-table th,td{
+    width: 33.33%;
+    border:1px solid #ddd;
+}
+.article-table .edit{
+    width: 20%;
+    height: 30px;
+    border-radius: 5px;
+    color:white;
+    background: rgb(16, 141, 43);
+    cursor: pointer;
+}
+.article-table .title{
+    cursor: pointer;
+}
+.article-table .delete{
+    width: 20%;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 5px;
+    color:white;
+    background: rgb(153, 15, 15);
+    cursor: pointer;
+}
+.center{
+    text-align: center;
+}
 

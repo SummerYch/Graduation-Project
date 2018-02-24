@@ -11,7 +11,7 @@ function User(req, res) {
         userInfo(req, res);
     }
     if (req.body.action === 'getUserInfo') {
-        getUserInfo(req,res);
+        getUserInfo(req, res);
     }
 }
 // 注册
@@ -147,7 +147,7 @@ function getUserInfo(req, res) {
     console.log("now at getUserInfo");
     var userid = req.body.userid;
     db(function (con) {
-        var sql = 'select * from user_info where userid=\''+userid+'\';';
+        var sql = 'select * from user_info where userid=\'' + userid + '\';';
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err);
