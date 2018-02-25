@@ -26,4 +26,14 @@ router.get('/articleManagement', function (req, res) {
         title: 'aiticle_management'
     });
 })
+router.get('/articleDetail', function (req, res) {
+    res.render('articledetail', {
+        title: 'articledetail'
+    });
+})
+router.get('/uploadsource',function(req,res){
+    res.render('uploadsource',{
+        title:'uploadsource'
+    });
+})
 module.exports = router;

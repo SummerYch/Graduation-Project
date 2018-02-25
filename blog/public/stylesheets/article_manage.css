@@ -85,15 +85,23 @@
 .manage .int input{
     background: #b9b5ae;
 }
+.manage .publish-source{
+    width: 120px;
+    height: 40px;
+    color: white;
+    background:#C92027;
+    border-radius: 5px;
+    cursor: pointer;
+}
 .word-active{
     color: black !important;
     border-bottom:3px solid #C92027;
 }
-.article-table{
+.article-table,.re-article-table{
     width: 100%;
     border: 2px solid #0c799a;
 }
-.article-table tr{
+.article-table,.re-article-table tr{
     width:100%;
 }
 .article-table th,td{
@@ -108,10 +116,27 @@
     background: rgb(16, 141, 43);
     cursor: pointer;
 }
+.re-article-table .restore{
+    width: 20%;
+    height: 30px;
+    border-radius: 5px;
+    color:white;
+    background: rgb(16, 141, 43);
+    cursor: pointer;
+}
 .article-table .title{
     cursor: pointer;
 }
 .article-table .delete{
+    width: 20%;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 5px;
+    color:white;
+    background: rgb(153, 15, 15);
+    cursor: pointer;
+}
+.re-article-table .delete{
     width: 20%;
     height: 30px;
     margin-left: 10px;

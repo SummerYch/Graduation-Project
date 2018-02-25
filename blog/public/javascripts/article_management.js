@@ -1,7 +1,43 @@
 $(function () {
     clickEvents();
-    //写博客
+    //写博客,提交
+    var userid = getUrlParameter("userid");
+    var username = getUrlParameter("username");
     $(".article-submit").click(function () {
+        var articleTitle = $("#article-title").val();
+        var article = $("#article").val();
+        var uploadtimeA = new Date();
+        var uploadtime = uploadtimeA.toLocaleString();
+        if (articleTitle == "" || article == "") {
+            alert("请填写相关内容");
+            return;
+        }
+        $.ajax({
+            url: "/article/write",
+            type: "post",
+            data: {
+                action: "writeblog",
+                location: "submit",
+                articleTitle: articleTitle,
+                article: article,
+                userid: userid,
+                uploadtime: uploadtime
+            },
+            success: function (data) {
+                if (data == "success") {
+                    alert("文章提交成功，请等待审核");
+                    $("#article-title").val("");
+                    $("#article").val("");
+                }
+            },
+            error: function (err) {
+                console.log("err:");
+                console.log(err);
+            }
+        });
+    });
+    //写博客,放入回收站
+    $(".in-draft").click(function () {
         var articleTitle = $("#article-title").val();
         var article = $("#article").val();
         var userid = getUrlParameter("userid");
@@ -16,14 +52,15 @@ $(function () {
             type: "post",
             data: {
                 action: "writeblog",
+                location: "in-draft",
                 articleTitle: articleTitle,
                 article: article,
                 userid: userid,
                 uploadtime: uploadtime
             },
             success: function (data) {
-                if(data == "success"){
-                    alert("文章提交成功，请等待审核");
+                if (data == "success") {
+                    alert("放入草稿箱成功");
                     $("#article-title").val("");
                     $("#article").val("");
                 }
@@ -36,35 +73,34 @@ $(function () {
     });
     //“全部列表”获取文章
     $.ajax({
-        url:"/article/get",
-        type:"post",
-        data:{
-            action:"getArticle",
-            location:"list-all"
+        url: "/article/get",
+        type: "post",
+        data: {
+            action: "getArticle",
+            location: "list-all"
         },
-        success:function(data){
-            console.log(data);
+        success: function (data) {
             var length = data.length;
             $(".all-article").html(length);
-            for(var i =0;i<data.length;i++){
-                if(data[i].status == 1){
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].status == 1) {
                     $("#allarticletable").append(" <tr>"
-                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
-                    +"<td class=\"center\">已发表</td>"
-                    +"<td class=\"center\">"
-                        +"<button class=\"edit\">编辑</button>"
-                        +"<button class=\"delete\">删除</button>"
-                    +"</td>"
-                +"</tr>");
-                }else if(data[i].status == 2){
+                        + "<td class=\"title\" value=\"" + data[i].id + "\">" + data[i].article_title + "</td>"
+                        + "<td class=\"center\">已发表</td>"
+                        + "<td class=\"center\">"
+                        + "<button class=\"edit\">编辑</button>"
+                        + "<button class=\"delete\">删除</button>"
+                        + "</td>"
+                        + "</tr>");
+                } else if (data[i].status == 2) {
                     $("#allarticletable").append(" <tr>"
-                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
-                    +"<td class=\"center\">草稿箱</td>"
-                    +"<td class=\"center\">"
-                        +"<button class=\"edit\">编辑</button>"
-                        +"<button class=\"delete\">删除</button>"
-                    +"</td>"
-                +"</tr>");
+                        + "<td class=\"title\" value=\"" + data[i].id + "\">" + data[i].article_title + "</td>"
+                        + "<td class=\"center\">草稿箱</td>"
+                        + "<td class=\"center\">"
+                        + "<button class=\"edit\">编辑</button>"
+                        + "<button class=\"delete\">删除</button>"
+                        + "</td>"
+                        + "</tr>");
                 }
             }
         },
@@ -75,23 +111,23 @@ $(function () {
     });
     //“已发表”获取文章
     $.ajax({
-        url:"/article/get",
-        type:"post",
-        data:{
-            action:"getArticle",
-            location:"list-posted"
+        url: "/article/get",
+        type: "post",
+        data: {
+            action: "getArticle",
+            location: "list-posted"
         },
-        success:function(data){
+        success: function (data) {
             var length = data.length;
             $(".posted").html(length);
-            for(var i =0;i<data.length;i++){
-                    $("#postedarticletable").append(" <tr>"
-                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
-                    +"<td class=\"center\">"
-                        +"<button class=\"edit\">编辑</button>"
-                        +"<button class=\"delete\">删除</button>"
-                    +"</td>"
-                +"</tr>");
+            for (var i = 0; i < data.length; i++) {
+                $("#postedarticletable").append(" <tr>"
+                    + "<td class=\"title\" value=\"" + data[i].id + "\">" + data[i].article_title + "</td>"
+                    + "<td class=\"center\">"
+                    + "<button class=\"edit\">编辑</button>"
+                    + "<button class=\"delete\">删除</button>"
+                    + "</td>"
+                    + "</tr>");
             }
         },
         error: function (err) {
@@ -101,23 +137,23 @@ $(function () {
     });
     //“草稿箱”获取文章
     $.ajax({
-        url:"/article/get",
-        type:"post",
-        data:{
-            action:"getArticle",
-            location:"list-drafts"
+        url: "/article/get",
+        type: "post",
+        data: {
+            action: "getArticle",
+            location: "list-drafts"
         },
-        success:function(data){
+        success: function (data) {
             var length = data.length;
             $(".drafts").html(length);
-            for(var i =0;i<data.length;i++){
-                    $("#draftsarticletable").append(" <tr>"
-                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
-                    +"<td class=\"center\">"
-                        +"<button class=\"edit\">编辑</button>"
-                        +"<button class=\"delete\">删除</button>"
-                    +"</td>"
-                +"</tr>");
+            for (var i = 0; i < data.length; i++) {
+                $("#draftsarticletable").append(" <tr>"
+                    + "<td class=\"title\" value=\"" + data[i].id + "\">" + data[i].article_title + "</td>"
+                    + "<td class=\"center\">"
+                    + "<button class=\"edit\">编辑</button>"
+                    + "<button class=\"delete\">删除</button>"
+                    + "</td>"
+                    + "</tr>");
             }
         },
         error: function (err) {
@@ -125,37 +161,91 @@ $(function () {
             console.log(err);
         }
     });
-     //“回收站”获取文章
-     $.ajax({
-        url:"/article/get",
-        type:"post",
-        data:{
-            action:"getArticle",
-            location:"list-recycle"
+    //“回收站”获取文章
+    $.ajax({
+        url: "/article/get",
+        type: "post",
+        data: {
+            action: "getArticle",
+            location: "list-recycle"
         },
-        success:function(data){
+        success: function (data) {
             var length = data.length;
             $(".recyble-bin").html(length);
-            for(var i =0;i<data.length;i++){
-                    $("#recyclearticletable").append(" <tr>"
-                    +"<td class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</td>"
-                    +"<td class=\"center\">"
-                        +"<button class=\"edit\">编辑</button>"
-                        +"<button class=\"delete\">删除</button>"
-                    +"</td>"
-                +"</tr>");
+            for (var i = 0; i < data.length; i++) {
+                $("#recyclearticletable").append(" <tr>"
+                    + "<td class=\"title\" value=\"" + data[i].id + "\" original_status=\"" + data[i].original_status + "\">" + data[i].article_title + "</td>"
+                    + "<td class=\"center\">"
+                    + "<button class=\"restore\">恢复</button>"
+                    + "<button class=\"delete\">删除</button>"
+                    + "</td>"
+                    + "</tr>");
             }
         },
         error: function (err) {
             console.log("err:");
             console.log(err);
         }
+    });
+    //点击标题显示文章内容
+    $(".article-table").on("click", ".title", function () {
+        window.location.href = "/articleDetail?userid=" + userid + "&username=" + username + "&articleid=" + $(this).attr("value");
+    });
+    //文章列表 操作
+    $(".article-table").on("click", ".delete", function () {
+        if (confirm("确认要删除该文章吗?")) {
+            var articleid = $(this).parent().parent().children(".title").attr("value");
+            $.ajax({
+                url: '/article/inrecycle',
+                type: 'post',
+                data: {
+                    action: 'inrecycle',
+                    articleid: articleid
+                },
+                success: function (data) {
+                    if (data.result == 'success') {
+                        alert("文章已放入回收站");
+                        window.location.reload();
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    });
+    //回收站恢复
+    $(".re-article-table").on("click",".restore",function(){
+        var original_status = $(this).parent().parent().children(".title").attr("original_status");
+        var articleid = $(this).parent().parent().children(".title").attr("value");
+        console.log(original_status);
+        $.ajax({
+            url:'/article/restore',
+            type:'post',
+            data:{
+                action:'restore',
+                articleid:articleid,
+                original_status:original_status
+            },
+            success:function(data){
+                alert("恢复成功");
+                window.location.reload();
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    });
+
+    //资源管理
+    $(".publish-source").on("click",function(){
+        window.location.href = '/'
     });
 });
 // li点击事件，包括相关盒子的显示隐藏，相关盒子内标题p的样式更改
 function clickEvents() {
     $(".left ul li").each(function () {
-        $(this).click(function () {
+        $(this).on("click", function () {
             var num = $(this).attr("value");
             $(this).addClass("active");
             $(this).siblings().removeClass("active");
