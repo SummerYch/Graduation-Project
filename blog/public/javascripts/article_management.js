@@ -12,29 +12,56 @@ $(function () {
             alert("请填写相关内容");
             return;
         }
-        $.ajax({
-            url: "/article/write",
-            type: "post",
-            data: {
-                action: "writeblog",
-                location: "submit",
-                articleTitle: articleTitle,
-                article: article,
-                userid: userid,
-                uploadtime: uploadtime
-            },
-            success: function (data) {
-                if (data == "success") {
-                    alert("文章提交成功，请等待审核");
-                    $("#article-title").val("");
-                    $("#article").val("");
+        if($("#article-title").attr("articleid")){
+            var articleid = $("#article-title").attr("articleid");
+            $.ajax({
+                url: "/article/write",
+                type: "post",
+                data: {
+                    action: "writeblog",
+                    location: "editstatus",
+                    articleid:articleid,
+                    articletitle:articleTitle,
+                    articlecontent:article,
+                    uploadtime:uploadtime
+                },
+                success: function (data) {
+                    if (data == "success") {
+                       alert("编辑成功");
+                       window.location.reload();
+                    }
+                },
+                error: function (err) {
+                    console.log("err:");
+                    console.log(err);
                 }
-            },
-            error: function (err) {
-                console.log("err:");
-                console.log(err);
-            }
-        });
+            });
+        }
+        else{
+            $.ajax({
+                url: "/article/write",
+                type: "post",
+                data: {
+                    action: "writeblog",
+                    location: "submit",
+                    articleTitle: articleTitle,
+                    article: article,
+                    userid: userid,
+                    uploadtime: uploadtime
+                },
+                success: function (data) {
+                    if (data == "success") {
+                        alert("文章提交成功，请等待审核");
+                        $("#article-title").val("");
+                        $("#article").val("");
+                    }
+                },
+                error: function (err) {
+                    console.log("err:");
+                    console.log(err);
+                }
+            });
+        }
     });
     //写博客,放入回收站
     $(".in-draft").click(function () {
@@ -177,7 +204,7 @@ $(function () {
                     + "<td class=\"title\" value=\"" + data[i].id + "\" original_status=\"" + data[i].original_status + "\">" + data[i].article_title + "</td>"
                     + "<td class=\"center\">"
                     + "<button class=\"restore\">恢复</button>"
-                    + "<button class=\"delete\">删除</button>"
+                    + "<button class=\"delete deepdel\">彻底删除</button>"
                     + "</td>"
                     + "</tr>");
             }
@@ -214,32 +241,84 @@ $(function () {
             });
         }
     });
-    //回收站恢复
-    $(".re-article-table").on("click",".restore",function(){
-        var original_status = $(this).parent().parent().children(".title").attr("original_status");
+    //点击编辑
+    $(".article-table").on("click", ".edit", function () {
+        var num = $(".left ul li:eq(0)").attr("value");
+        $(".left ul li:eq(0)").addClass("active");
+        $(".left ul li:eq(0)").siblings().removeClass("active");
+        var box = $(".box" + num);
+        box.removeClass("hide").addClass("show");
+        box.siblings().removeClass("show").addClass("hide");
+
         var articleid = $(this).parent().parent().children(".title").attr("value");
-        console.log(original_status);
         $.ajax({
-            url:'/article/restore',
-            type:'post',
-            data:{
-                action:'restore',
-                articleid:articleid,
-                original_status:original_status
+            url: '/article/getdetail',
+            type: 'post',
+            data: {
+                action: 'getdetail',
+                articleid: articleid
             },
-            success:function(data){
-                alert("恢复成功");
-                window.location.reload();
+            success: function (data) {
+                var articlecontent = data[0].article_content;
+                var articletitle = data[0].article_title;
+                var articleid = data[0].id;
+                $("#article-title").attr("articleid", articleid);
+                $("#article-title").val(articletitle);
+                $("#article").html(articlecontent);
             },
-            error:function(err){
+            error: function (err) {
                 console.log(err);
             }
         });
     });
-
+    //回收站恢复
+    $(".re-article-table").on("click", ".restore", function () {
+        var original_status = $(this).parent().parent().children(".title").attr("original_status");
+        var articleid = $(this).parent().parent().children(".title").attr("value");
+        console.log(original_status);
+        $.ajax({
+            url: '/article/restore',
+            type: 'post',
+            data: {
+                action: 'restore',
+                articleid: articleid,
+                original_status: original_status
+            },
+            success: function (data) {
+                alert("恢复成功");
+                window.location.reload();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+    //回收站彻底删除
+    $(".re-article-table").on("click", ".deepdel", function () {
+        if (confirm('是否确认彻底删除？删除后不可恢复')) {
+            var articleid = $(this).parent().parent().children(".title").attr("value");
+            $.ajax({
+                url: '/article/deepdelete',
+                type: 'post',
+                data: {
+                    action: 'deepdel',
+                    articleid: articleid
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        alert("删除成功");
+                        window.location.reload();
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    });
     //资源管理
-    $(".publish-source").on("click",function(){
-        window.location.href = '/'
+    $(".publish-source").on("click", function () {
+        window.location.href = '/uploadsource?userid='+userid+'&username='+username;
     });
 });
 // li点击事件，包括相关盒子的显示隐藏，相关盒子内标题p的样式更改

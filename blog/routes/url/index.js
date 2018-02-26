@@ -31,9 +31,9 @@ router.get('/articleDetail', function (req, res) {
         title: 'articledetail'
     });
 })
-router.get('/uploadsource',function(req,res){
-    res.render('uploadsource',{
-        title:'uploadsource'
+router.get('/uploadsource', function (req, res) {
+    res.render('uploadsource', {
+        title: 'uploadsource'
     });
 })
 module.exports = router;

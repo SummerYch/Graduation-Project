@@ -9,11 +9,14 @@ function article(req, res) {
     if (req.body.action === 'getdetail') {
         getDetail(req, res);
     }
-    if(req.body.action === 'inrecycle'){
-        inRecycle(req,res);
+    if (req.body.action === 'inrecycle') {
+        inRecycle(req, res);
     }
-    if(req.body.action === 'restore'){
-        restore(req,res);
+    if (req.body.action === 'restore') {
+        restore(req, res);
+    }
+    if (req.body.action === 'deepdel') {
+        deepDelete(req, res);
     }
 }
 function writeBlog(req, res) {
@@ -48,6 +51,22 @@ function writeBlog(req, res) {
                 res.send("success");
             });
         }, 'blog');
+    } else if (req.body.location === 'editstatus') {
+        console.log("in editstatus");
+        var articleid = req.body.articleid;
+        var articletitle = req.body.articletitle;
+        var articlecontent = req.body.articlecontent;
+        var uploadtime = req.body.uploadtime;
+        db(function (con) {
+            var sql = 'update articlelist set article_title="'+articletitle+'",article_content="'+articlecontent+'",uploadtime="'+uploadtime+'" where id='+articleid+';';
+            con.query(sql, function (err, rows) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                res.send("success");
+            });
+        },'blog');
     }
 }
 function getArticle(req, res) {
@@ -107,61 +126,76 @@ function getArticle(req, res) {
 function getDetail(req, res) {
     console.log("in get detail");
     var articleid = req.body.articleid;
-    db(function(con){
-        var sql = 'select * from articlelist where id='+articleid;
-        con.query(sql,function(err,rows){
-            if(err){
+    db(function (con) {
+        var sql = 'select * from articlelist where id=' + articleid;
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
             console.log(rows);
             res.send(rows);
         });
-    },'blog');
+    }, 'blog');
 }
-function inRecycle(req,res){
+function inRecycle(req, res) {
     console.log("in recycle");
     var articleid = req.body.articleid;
-    db(function(con){
+    db(function (con) {
         // var sql = 'update articlelist set status=3 where id='+articleid+";";
-        var sql = 'select * from articlelist where id='+articleid;
-        con.query(sql,function(err,rows){
-            if(err){
+        var sql = 'select * from articlelist where id=' + articleid;
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
             var original_status = rows[0].status;
-            db(function(){
-                var sql2 = 'update articlelist set status=3,original_status='+original_status+' where id='+articleid+';';
-                con.query(sql2,function(err,rows2){
-                    if(err){
+            db(function () {
+                var sql2 = 'update articlelist set status=3,original_status=' + original_status + ' where id=' + articleid + ';';
+                con.query(sql2, function (err, rows2) {
+                    if (err) {
                         console.log(err);
                         return;
                     }
                     console.log(rows);
                     var data = {
-                        original_status:original_status,
-                        result:"success"
+                        original_status: original_status,
+                        result: "success"
                     }
                     res.send(data);
                 });
-            },'blog');
+            }, 'blog');
         });
-    },'blog');
+    }, 'blog');
 }
-function restore(req,res){
+function restore(req, res) {
     var articleid = req.body.articleid;
     var status = req.body.original_status;
-    db(function(con){
-        var sql = 'update articlelist set status='+status+' where id='+articleid+';';
-        con.query(sql,function(err,rows){
-            if(err){
+    db(function (con) {
+        var sql = 'update articlelist set status=' + status + ' where id=' + articleid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
             console.log(rows);
             res.send("success");
         });
-    },'blog');
+    }, 'blog');
+}
+function deepDelete(req, res) {
+    console.log("in deepdelete");
+    var articleid = req.body.articleid;
+    db(function (con) {
+        var sql = 'delete from articlelist where id=' + articleid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(rows);
+            res.send("success");
+        });
+    }, 'blog');
 }
 module.exports = article;

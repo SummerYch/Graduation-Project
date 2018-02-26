@@ -7,13 +7,27 @@
     <link rel="stylesheet" href="stylesheets/base.css">
     <link rel="stylesheet" href="stylesheets/public.css">
     <link rel="stylesheet" href="stylesheets/uploadsource.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <nav></nav>
+    <nav>
+        <div class="logo"><img src="images/yearlogo2.png" alt=""></div>
+        <div class="user">
+            <i class="fa fa-user-circle-o"></i> &nbsp;
+            <span>username</span>
+            <div class="operating hide">
+                <ul>
+                    <li class="personal-center">个人中心</li>
+                    <li class="writeblog">写博客</li>
+                    <li>退出登录</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="contain">
-            <form action="">
+            <form action="#" id="uploadform">
                 <div class="title">上传资源</div>
                 <div class="uploadfile">
                     <span class="choose_intro choose_btn">
@@ -23,7 +37,8 @@
                     <span class="choose_intro">
                         <em id="filename">(未选择文件)</em>
                         <em>您可以上传小于
-                            <em class="fileMaxSize" style="display: inline; color:#e33f3f">110MB</em>的文件</em>
+                            <em class="fileMaxSize" style="display: inline; color:#e33f3f">110MB</em>的文件
+                        </em>
                     </span>
                 </div>
                 <ul>
@@ -34,11 +49,10 @@
                     <li>
                         <label for="">资源类型：</label>
                         <select name="file_type" id="file_type" class="file_type">
-                            <option value="0">请选择</option>
-                            <option value="1">文档</option>
-                            <option value="2">代码类</option>
-                            <option value="3">工具类</option>
-                            <option value="4">其他</option>
+                            <option value="文档">文档</option>
+                            <option value="代码类">代码类</option>
+                            <option value="工具类">工具类</option>
+                            <option value="其他">其他</option>
                         </select>
                     </li>
                     <li>
@@ -48,26 +62,26 @@
                     <li>
                         <label for="">所属分类：</label>
                         <select name=" classify" id="classify" class="file_type">
-                            <option value="0">请选择</option>
-                            <option value="1">移动开发</option>
-                            <option value="2">开发技术</option>
-                            <option value="3">课程资源</option>
-                            <option value="4">其他</option>
+                            <option value="移动开发">移动开发</option>
+                            <option value="开发技术">开发技术</option>
+                            <option value="课程资源">课程资源</option>
+                            <option value="其他">其他</option>
                         </select>
                     </li>
                     <li>
                         <label for="">资源分：</label>
                         <select name="fraction" id="fraction" class="file_type">
-                            <option value="0">5</option>
-                            <option value="1">2</option>
-                            <option value="2">8</option>
-                            <option value="3">10</option>
-                            <option value="4">12</option>
-                            <option value="4">15</option>
-                            <option value="3">20</option>
-                            <option value="4">25</option>
-                            <option value="4">30</option>
-                            <option value="4">50</option>
+                            <option value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="2">2</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
                         </select>
                     </li>
                     <li>
@@ -83,8 +97,8 @@
     </div>
 
     <script src="javascripts/plugins/jquery-1.11.1.min.js"></script>
-    <script src="javascript/public.js"></script>
-    <script src="javascript/uploadsource.js"></script>
+    <script src="javascripts/public.js"></script>
+    <script src="javascripts/uploadsource.js"></script>
 </body>
 
 </html>
