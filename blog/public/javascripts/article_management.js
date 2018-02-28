@@ -12,7 +12,7 @@ $(function () {
             alert("请填写相关内容");
             return;
         }
-        if($("#article-title").attr("articleid")){
+        if ($("#article-title").attr("articleid")) {
             var articleid = $("#article-title").attr("articleid");
             $.ajax({
                 url: "/article/write",
@@ -20,15 +20,15 @@ $(function () {
                 data: {
                     action: "writeblog",
                     location: "editstatus",
-                    articleid:articleid,
-                    articletitle:articleTitle,
-                    articlecontent:article,
-                    uploadtime:uploadtime
+                    articleid: articleid,
+                    articletitle: articleTitle,
+                    articlecontent: article,
+                    uploadtime: uploadtime
                 },
                 success: function (data) {
                     if (data == "success") {
-                       alert("编辑成功");
-                       window.location.reload();
+                        alert("编辑成功");
+                        window.location.reload();
                     }
                 },
                 error: function (err) {
@@ -37,7 +37,7 @@ $(function () {
                 }
             });
         }
-        else{
+        else {
             $.ajax({
                 url: "/article/write",
                 type: "post",
@@ -318,7 +318,28 @@ $(function () {
     });
     //资源管理
     $(".publish-source").on("click", function () {
-        window.location.href = '/uploadsource?userid='+userid+'&username='+username;
+        window.location.href = '/uploadsource?userid=' + userid + '&username=' + username;
+    });
+    //已发布的资源获取文件
+    $.ajax({
+        url: '/source/getsource',
+        type: 'post',
+        data: {
+            action: 'posted',
+            userid: userid
+        },
+        success: function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                $(".posted-source ul").append("<li>"
+                    + "<p class=\"filename\" value=\"1\">" + data[i].sourcename + "</p>"
+                    + "<p class=\"uploadtime\">2018/2/9</p>"
+                    + "</li>");
+            }
+        },
+        error: function (err) {
+
+        }
     });
 });
 // li点击事件，包括相关盒子的显示隐藏，相关盒子内标题p的样式更改

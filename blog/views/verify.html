@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/public.css">
+    <link rel="stylesheet" href="stylesheets/verify.css">
+    <title>审核页面</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tag">
+            <button class="btn btn-article clicked" value="article">文章</button>
+            <button class="btn btn-source not-clicked" value="source">资源</button>
+        </div>
+        <div>
+            <div class="box article">
+                文章审核:
+                <ul class="article-ul">
+                    <!-- <li>
+                        <div class="title" value=""></div>
+                        <div class="content"></div>
+                    </li> -->
+                </ul>
+            </div>
+            <div class="box source">
+                资源审核:
+            </div>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="content clearfix">
+            <div class="x">x</div>
+            <div>文章编号:
+                <span class="id"></span>
+            </div>
+            <div>
+                <p>内容:</p>
+                <hr>
+                <p class="article"></p>
+            </div>
+            <hr>
+            <button class="btn2 pass">通过</button>
+            <button class="btn2 notpass">不通过</button>
+        </div>
+    </div>
+
+    <script src="javascripts/plugins/jquery-1.11.1.min.js"></script>
+    <script src="javascripts/verify.js"></script>
+</body>
+
+</html>

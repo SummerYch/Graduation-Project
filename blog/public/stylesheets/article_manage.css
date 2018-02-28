@@ -93,6 +93,20 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.manage-source .box ul li{
+    padding:5px;
+    box-sizing: border-box; 
+    border-bottom:1px dotted #999;
+    cursor: pointer;
+}
+.manage-source .box ul li .filename{
+    font-size: 18px;
+}
+.manage-source .box ul li .uploadtime{
+    margin-top: 5px;
+    font-size: 14px;
+    color: #999;
+}
 .word-active{
     color: black !important;
     border-bottom:3px solid #C92027;

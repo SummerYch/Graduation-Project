@@ -18,6 +18,9 @@ function article(req, res) {
     if (req.body.action === 'deepdel') {
         deepDelete(req, res);
     }
+    if(req.body.action === 'admingetarticle'){
+        adminGetArticle(req,res);
+    }
 }
 function writeBlog(req, res) {
     console.log("in writeblog");
@@ -197,5 +200,17 @@ function deepDelete(req, res) {
             res.send("success");
         });
     }, 'blog');
+}
+function adminGetArticle(req,res){
+    db(function(con){
+        var sql = 'select * from articlelist where status=0;';
+        con.query(sql,function(err,rows){
+            if(err){
+                console.log(err);
+                return;
+            }
+            res.send(rows);
+        })
+    },'blog');
 }
 module.exports = article;

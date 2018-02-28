@@ -25,4 +25,7 @@ router.post('/restore', function (req, res) {
 router.post('/deepdelete', function (req, res) {
     article(req, res);
 });
+router.post('/admingetarticle',function(req,res){
+    article(req,res);
+});
 module.exports = router;
