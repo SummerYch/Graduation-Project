@@ -27,7 +27,7 @@
     </nav>
     <div class="container">
         <div class="contain">
-            <form action="#" id="uploadform">
+            <form action="/source/upload" id="uploadform" method="post">
                 <div class="title">上传资源</div>
                 <div class="uploadfile">
                     <span class="choose_intro choose_btn">
@@ -44,7 +44,7 @@
                 <ul>
                     <li>
                         <label for="">资源名称：</label>
-                        <input type="text" class="type_name" id="type_name">
+                        <input type="text" class="type_name" id="source_name">
                     </li>
                     <li>
                         <label for="">资源类型：</label>
@@ -86,10 +86,11 @@
                     </li>
                     <li>
                         <label for="">资源描述：</label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="" id="description" cols="30" rows="10"></textarea>
                     </li>
                     <div class="btn">
                         <input type="submit" value="提交" id="submit" class="submit">
+                        <!-- <button id="submit" class="submit">提交</button> -->
                     </div>
                 </ul>
             </form>
