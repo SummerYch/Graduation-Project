@@ -4,7 +4,6 @@ var path = require("path");
 var fs = require("fs");
 
 function source(req, res) {
-    console.log("*********************************************");
     var form = new formidable.IncomingForm(); //创建上传表单  
     form.encoding = 'utf-8'; //设置编辑  
     form.uploadDir = './file'; //设置上传目录  

@@ -25,7 +25,17 @@ router.post('/restore', function (req, res) {
 router.post('/deepdelete', function (req, res) {
     article(req, res);
 });
-router.post('/admingetarticle',function(req,res){
-    article(req,res);
+//审核页获取文章
+router.post('/admingetarticle', function (req, res) {
+    article(req, res);
+});
+//审核文章,通过
+router.post('/pass', function (req, res) {
+    article(req, res);
+});
+//审核文章，不通过
+router.post('/notpass', function (req, res) {
+    console.log(req.body.action);
+    article(req, res);
 });
 module.exports = router;

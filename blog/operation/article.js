@@ -18,8 +18,15 @@ function article(req, res) {
     if (req.body.action === 'deepdel') {
         deepDelete(req, res);
     }
-    if(req.body.action === 'admingetarticle'){
-        adminGetArticle(req,res);
+    if (req.body.action === 'admingetarticle') {
+        adminGetArticle(req, res);
+    }
+    if (req.body.action === 'articlepass') {
+        articlePass(req, res);
+    }
+    if (req.body.action === 'articlenotpass') {
+        console.log("3");
+        articleNotPass(req, res);
     }
 }
 function writeBlog(req, res) {
@@ -61,7 +68,7 @@ function writeBlog(req, res) {
         var articlecontent = req.body.articlecontent;
         var uploadtime = req.body.uploadtime;
         db(function (con) {
-            var sql = 'update articlelist set article_title="'+articletitle+'",article_content="'+articlecontent+'",uploadtime="'+uploadtime+'" where id='+articleid+';';
+            var sql = 'update articlelist set article_title="' + articletitle + '",article_content="' + articlecontent + '",uploadtime="' + uploadtime + '" where id=' + articleid + ';';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -69,14 +76,15 @@ function writeBlog(req, res) {
                 }
                 res.send("success");
             });
-        },'blog');
+        }, 'blog');
     }
 }
 function getArticle(req, res) {
     console.log("in getArticle");
+    var userid = req.body.userid;
     if (req.body.location == "list-all") {
         db(function (con) {
-            var sql = 'select * from articlelist where status in (1,2);';
+            var sql = 'select * from articlelist where userid='+userid+' and (status=1 or status=2);';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -89,7 +97,7 @@ function getArticle(req, res) {
     }
     if (req.body.location == "list-posted") {
         db(function (con) {
-            var sql = 'select * from articlelist where status=1;';
+            var sql = 'select * from articlelist where userid='+userid+' and status=1;';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -102,7 +110,7 @@ function getArticle(req, res) {
     }
     if (req.body.location == "list-drafts") {
         db(function (con) {
-            var sql = 'select * from articlelist where status=2;';
+            var sql = 'select * from articlelist where userid='+userid+' and status=2;';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -114,7 +122,7 @@ function getArticle(req, res) {
         }, 'blog');
     } else if (req.body.location == "list-recycle") {
         db(function (con) {
-            var sql = 'select * from articlelist where status=3;';
+            var sql = 'select * from articlelist where userid='+userid+' and status=3;';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -201,16 +209,43 @@ function deepDelete(req, res) {
         });
     }, 'blog');
 }
-function adminGetArticle(req,res){
-    db(function(con){
+function adminGetArticle(req, res) {
+    db(function (con) {
         var sql = 'select * from articlelist where status=0;';
-        con.query(sql,function(err,rows){
-            if(err){
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
             res.send(rows);
         })
+    }, 'blog');
+}
+function articlePass(req, res) {
+    var articleid = req.body.articleid;
+    db(function (con) {
+        var sql = 'update articlelist set status="1" where id=' + articleid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            res.send("success");
+        });
+    }, 'blog');
+}
+function articleNotPass(req,res){
+    console.log("2");
+    var articleid = req.body.articleid;
+    db(function(con){
+        var sql = 'update articlelist set status="-1" where id=' + articleid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            res.send("success");
+        });
     },'blog');
 }
 module.exports = article;

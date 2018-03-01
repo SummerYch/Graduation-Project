@@ -104,7 +104,8 @@ $(function () {
         type: "post",
         data: {
             action: "getArticle",
-            location: "list-all"
+            location: "list-all",
+            userid:userid
         },
         success: function (data) {
             var length = data.length;
@@ -142,7 +143,8 @@ $(function () {
         type: "post",
         data: {
             action: "getArticle",
-            location: "list-posted"
+            location: "list-posted",
+            userid:userid
         },
         success: function (data) {
             var length = data.length;
@@ -168,7 +170,8 @@ $(function () {
         type: "post",
         data: {
             action: "getArticle",
-            location: "list-drafts"
+            location: "list-drafts",
+            userid:userid
         },
         success: function (data) {
             var length = data.length;
@@ -194,7 +197,8 @@ $(function () {
         type: "post",
         data: {
             action: "getArticle",
-            location: "list-recycle"
+            location: "list-recycle",
+            userid:userid
         },
         success: function (data) {
             var length = data.length;

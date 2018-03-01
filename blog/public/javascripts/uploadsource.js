@@ -10,9 +10,15 @@ $(function () {
     });
 
     $("#submit").click(function () {
-        if ($("#source_name") == "" || $("#tag") == "" || $("#description") == "") {
+        if ($("#source_name").val() == "" || $("#tag").val() == "" || $("#description").val() == "") {
             alert("请填写相关资料");
-        } else {
+            return;
+        } 
+        if(!$("#file")[0].files[0]){
+            alert("请选择文件");
+            return;
+        }
+        else {
             var uploadtimeA = new Date();
             var uploadtime = uploadtimeA.toLocaleString();
             var sourcename = $("#source_name").val();
