@@ -106,7 +106,28 @@
 }
 .container .recommend {
   width: 1200px;
-  height: 20px;
   margin-top: 20px;
   /* border: 1px solid red; */
+}
+.recommend ul{
+  padding: 20px 0;
+}
+.recommend ul li{
+  padding: 5px 20px;
+  box-sizing: border-box;
+  border-bottom:1px dotted gray;
+  cursor: pointer;
+}
+.recommend .title{
+  font-size: 22px;
+  font-weight: bold;
+  /* background: rgb(197, 15, 15); */
+}
+.recommend .info{
+  font-size: 16px;
+}
+.recommend .sp{
+  margin-right: 20px;
+  font-size: 16px;
+  color:#5d5d5d;
 }

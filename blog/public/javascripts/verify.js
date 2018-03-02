@@ -12,7 +12,7 @@ $(function () {
             });
         });
     });
-    //获取内容
+    //文章获取内容
     $.ajax({
         url: '/article/admingetarticle',
         type: 'post',
@@ -36,6 +36,42 @@ $(function () {
     $(".x").on("click", function () {
         $(".mask").css({ display: "none" });
     })
+    //资源获取内容
+    $.ajax({
+        url: '/source/admingetsource',
+        type: 'post',
+        data: {
+            action: 'admingetsource'
+        },
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                $(".source-ul").append("<li><div class=\"id\" value=\"\">资源编号: " + data[i].id + "</div>"
+                    + "<div class=\"title\">资源名称: " + data[i].sourcename + "</div>"
+                    + "<div>文件路径: " + data[i].sourcepath + "</div>"
+                    + "<div>"
+                    // + "<button class=\"btn openpath\">打开文件路径<span class=\"path\">" + data[i].sourcepath + "</span></button>"
+                    + "<button class=\"btn source-pass\">通过</button>"
+                    + "<button class=\"btn source-not-pass\">不通过</button>"
+                    + "</div></li>");
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+    //打开文件路径
+    $(".source-ul").on("click", ".openpath", function () {
+        var filepath = $(this).children(".path").html();
+        try {
+            var obj = new ActiveXObject("wscript.shell");
+            if (obj) {
+                obj.Run(filepath, 1, false);
+            }
+        } catch (e) {
+            console.log(e);
+            alert("打开失败");
+        }
+    });
     //点击li列表查看内容
     $(".article-ul").on("click", "li", function () {
         var id = $(this).children(".id").html().split(" ")[1];
@@ -49,7 +85,7 @@ $(function () {
         var articleid = $(".content .id").html();
         $.ajax({
             url: '/article/pass',
-            type:'post',
+            type: 'post',
             data: {
                 action: 'articlepass',
                 articleid: articleid
@@ -70,7 +106,7 @@ $(function () {
         var articleid = $(".content .id").html();
         $.ajax({
             url: '/article/notpass',
-            type:'post',
+            type: 'post',
             data: {
                 action: 'articlenotpass',
                 articleid: articleid
@@ -86,5 +122,40 @@ $(function () {
             }
         });
 
+    });
+    //审核资源是否通过
+    $(".source-ul").on("click",".source-pass",function(){
+        var sourceid = $(this).parent().parent().children(".id").html().split(" ")[1];
+        $.ajax({
+            url:'/source/sourcepass',
+            type:'post',
+            data:{
+                action:'sourcepass',
+                sourceid:sourceid
+            },
+            success:function(data){
+                alert("操作成功");
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    });
+    $(".source-ul").on("click",".source-not-pass",function(){
+        var sourceid = $(this).parent().parent().children(".id").html().split(" ")[1];
+        $.ajax({
+            url:'/source/sourcenotpass',
+            type:'post',
+            data:{
+                action:'sourcenotpass',
+                sourceid:sourceid
+            },
+            success:function(data){
+                alert("操作成功");
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
     });
 });

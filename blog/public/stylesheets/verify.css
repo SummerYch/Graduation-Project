@@ -26,12 +26,27 @@
   padding: 5px;
   box-sizing: border-box;
   border-bottom: 2px solid #ddd;
-  cursor: pointer;
 }
 .article-ul .article-content {
   display: none;
 }
+.article-ul li {
+  cursor: pointer;
+}
 .source {
+  display: none;
+}
+.source-ul .btn {
+  width: 80px;
+  height: 40px;
+  margin-right: 10px;
+  margin-top: 5px;
+  color: #ffffff;
+  border-radius: 5px;
+  background: #1272aa;
+  cursor: pointer;
+}
+.source-ul .path {
   display: none;
 }
 .mask {

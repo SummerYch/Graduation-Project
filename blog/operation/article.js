@@ -25,8 +25,10 @@ function article(req, res) {
         articlePass(req, res);
     }
     if (req.body.action === 'articlenotpass') {
-        console.log("3");
         articleNotPass(req, res);
+    }
+    if (req.body.action === 'indexgetarticle') {
+        indexGetArticle(req, res);
     }
 }
 function writeBlog(req, res) {
@@ -34,11 +36,12 @@ function writeBlog(req, res) {
     var articleTitle = req.body.articleTitle;
     var article = req.body.article;
     var userid = req.body.userid;
+    var username = req.body.username;
     var uploadtime = req.body.uploadtime;
     if (req.body.location === 'submit') {
         console.log("submit");
         db(function (con) {
-            var sql = 'insert into articlelist(userid,article_title,article_content,uploadtime,status) values(\'' + userid + '\',\'' + articleTitle + '\',\'' + article + '\',\'' + uploadtime + '\',\'0\');';
+            var sql = 'insert into articlelist(userid,username,article_title,article_content,uploadtime,status) values(\'' + userid + '\',\''+username+'\',\'' + articleTitle + '\',\'' + article + '\',\'' + uploadtime + '\',\'0\');';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -84,7 +87,7 @@ function getArticle(req, res) {
     var userid = req.body.userid;
     if (req.body.location == "list-all") {
         db(function (con) {
-            var sql = 'select * from articlelist where userid='+userid+' and (status=1 or status=2);';
+            var sql = 'select * from articlelist where userid=' + userid + ' and (status=1 or status=2);';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -97,7 +100,7 @@ function getArticle(req, res) {
     }
     if (req.body.location == "list-posted") {
         db(function (con) {
-            var sql = 'select * from articlelist where userid='+userid+' and status=1;';
+            var sql = 'select * from articlelist where userid=' + userid + ' and status=1;';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -110,7 +113,7 @@ function getArticle(req, res) {
     }
     if (req.body.location == "list-drafts") {
         db(function (con) {
-            var sql = 'select * from articlelist where userid='+userid+' and status=2;';
+            var sql = 'select * from articlelist where userid=' + userid + ' and status=2;';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -122,7 +125,7 @@ function getArticle(req, res) {
         }, 'blog');
     } else if (req.body.location == "list-recycle") {
         db(function (con) {
-            var sql = 'select * from articlelist where userid='+userid+' and status=3;';
+            var sql = 'select * from articlelist where userid=' + userid + ' and status=3;';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -137,6 +140,7 @@ function getArticle(req, res) {
 function getDetail(req, res) {
     console.log("in get detail");
     var articleid = req.body.articleid;
+    console.log(articleid);
     db(function (con) {
         var sql = 'select * from articlelist where id=' + articleid;
         con.query(sql, function (err, rows) {
@@ -234,10 +238,10 @@ function articlePass(req, res) {
         });
     }, 'blog');
 }
-function articleNotPass(req,res){
+function articleNotPass(req, res) {
     console.log("2");
     var articleid = req.body.articleid;
-    db(function(con){
+    db(function (con) {
         var sql = 'update articlelist set status="-1" where id=' + articleid + ';';
         con.query(sql, function (err, rows) {
             if (err) {
@@ -245,6 +249,18 @@ function articleNotPass(req,res){
                 return;
             }
             res.send("success");
+        });
+    }, 'blog');
+}
+function indexGetArticle(req,res){
+    db(function(con){
+        var sql = 'select * from articlelist;';
+        con.query(sql,function(err,rows){
+            if(err){
+                console.log(err);
+                return;
+            }
+            res.send(rows);
         });
     },'blog');
 }

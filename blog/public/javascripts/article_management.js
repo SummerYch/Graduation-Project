@@ -47,6 +47,7 @@ $(function () {
                     articleTitle: articleTitle,
                     article: article,
                     userid: userid,
+                    username:username,
                     uploadtime: uploadtime
                 },
                 success: function (data) {
@@ -105,7 +106,7 @@ $(function () {
         data: {
             action: "getArticle",
             location: "list-all",
-            userid:userid
+            userid: userid
         },
         success: function (data) {
             var length = data.length;
@@ -144,7 +145,7 @@ $(function () {
         data: {
             action: "getArticle",
             location: "list-posted",
-            userid:userid
+            userid: userid
         },
         success: function (data) {
             var length = data.length;
@@ -171,7 +172,7 @@ $(function () {
         data: {
             action: "getArticle",
             location: "list-drafts",
-            userid:userid
+            userid: userid
         },
         success: function (data) {
             var length = data.length;
@@ -198,7 +199,7 @@ $(function () {
         data: {
             action: "getArticle",
             location: "list-recycle",
-            userid:userid
+            userid: userid
         },
         success: function (data) {
             var length = data.length;

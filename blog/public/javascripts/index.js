@@ -21,5 +21,33 @@ $(function () {
     $(".personal-center").click(function () {
         window.location.href = '/personalCenter?userid=' + userId + '&username=' + username;
     });
+    $.ajax({
+        url: '/article/indexgetarticle',
+        type: 'post',
+        data: {
+            action:'indexgetarticle'
+        },
+        success: function (data) {
+            console.log(data);
+            for(var i=0;i<data.length;i++){
+                $(".recommend ul").append(" <li class=\"art-li\">"
+                +"<div class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</div>"
+                +"<div class=\"info\">"
+                    +"<span class=\"sp author\" value=\"\">"+data[i].username+"</span>"
+                    +"<span class=\"sp time\">"+data[i].uploadtime+"</span>"
+                +"</div>"
+            +"</li>");
+            }
+            
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+    $(".list").on("click",".art-li",function(){
+        // alert("1");
+        var articleid = $(this).children(".title").attr("value");
+        window.open('/articlepage?userid='+userId+'&username='+username+'&articleid='+articleid);
+    });
 })
 

@@ -36,9 +36,12 @@ router.get('/uploadsource', function (req, res) {
         title: 'uploadsource'
     });
 })
-router.get('/verify',function(Req,res){
+router.get('/verify',function(req,res){
     res.render('verify',{
         title:'uploadsource'
     });
+})
+router.get('/articlepage',function(req,res){
+    res.render('articlepage');
 })
 module.exports = router;

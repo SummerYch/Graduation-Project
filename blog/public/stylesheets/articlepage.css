@@ -6,28 +6,29 @@ body {
   overflow: visible;
 }
 .right {
+  position: relative;
   width: 79%;
-  height: 850px;
   background: #fff;
   float: left;
   overflow-y: scroll;
 }
 .right .collect-comment {
-  position: absolute;
-  left: -60px;
+  position: fixed;
+  left: 5px;
   top: 200px;
   width: 50px;
   height: 120px;
 }
 .right .collect-comment .c-c {
   margin-top: 10px;
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   color: #788087;
   font-size: 24px;
-  line-height: 50px;
+  line-height: 42px;
   text-align: center;
   border-radius: 50%;
+  border: 2px solid #ddd;
   background: #fff;
   cursor: pointer;
 }
@@ -45,10 +46,39 @@ body {
 .right .content {
   padding: 15px;
   width: 100%;
-  font-size: 45px;
+  font-size: 22px;
   text-indent: 2em;
+  border-bottom: 1px solid #e5e5e5;
   background: #fff;
   box-sizing: border-box;
+}
+.right .comment {
+  width: 100%;
+  padding: 10px 10px;
+  box-sizing: border-box;
+}
+.right .comment #comment {
+  width: 80%;
+  height: 120px;
+  padding: 10px;
+  border: 1px solid #ac2b2b;
+}
+.right .comment .issue {
+  position: relative;
+  left: 0;
+  top: -15px;
+  width: 80px;
+  height: 40px;
+  color: white;
+  background: #e40f0f;
+  cursor: pointer;
+}
+.right .comment .com {
+  width: 100%;
+  border-top: 2px solid #788087;
+}
+.right .comment .com .com-list li {
+  padding: 10px;
 }
 .left {
   width: 20%;
