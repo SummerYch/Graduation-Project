@@ -41,4 +41,8 @@ router.post('/notpass', function (req, res) {
 router.post('/indexgetarticle',function(req,res){
     article(req,res);
 });
+//通过文章获取用户获取用户
+router.post('/getuser',function(req,res){
+   article(req,res);
+});
 module.exports = router;

@@ -30,6 +30,9 @@ function article(req, res) {
     if (req.body.action === 'indexgetarticle') {
         indexGetArticle(req, res);
     }
+    if(req.body.action === 'getuser'){
+        getUser(req,res);
+    }
 }
 function writeBlog(req, res) {
     console.log("in writeblog");
@@ -140,7 +143,6 @@ function getArticle(req, res) {
 function getDetail(req, res) {
     console.log("in get detail");
     var articleid = req.body.articleid;
-    console.log(articleid);
     db(function (con) {
         var sql = 'select * from articlelist where id=' + articleid;
         con.query(sql, function (err, rows) {
@@ -259,6 +261,18 @@ function indexGetArticle(req,res){
             if(err){
                 console.log(err);
                 return;
+            }
+            res.send(rows);
+        });
+    },'blog');
+}
+function getUser(req,res){
+    var articleid = req.body.articleid;
+    db(function(con){
+        var sql = 'select * from articlelist where id='+articleid+';';
+        con.query(sql,function(err,rows){
+            if(err){
+                console.log(err);
             }
             res.send(rows);
         });

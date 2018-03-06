@@ -45,7 +45,6 @@ $(function () {
         }
     });
     $(".list").on("click",".art-li",function(){
-        // alert("1");
         var articleid = $(this).children(".title").attr("value");
         window.open('/articlepage?userid='+userId+'&username='+username+'&articleid='+articleid);
     });

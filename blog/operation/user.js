@@ -13,6 +13,15 @@ function User(req, res) {
     if (req.body.action === 'getUserInfo') {
         getUserInfo(req, res);
     }
+    if(req.body.action === 'addattention'){
+        addAttention(req,res);
+    }
+    if(req.body.action === 'ifattention'){
+        ifAttention(req,res);
+    }
+    if(req.body.action === 'cancelattention'){
+        cancelAttention(req,res);
+    }
 }
 // 注册
 function register(req, res) {
@@ -158,5 +167,47 @@ function getUserInfo(req, res) {
             res.send(rows[0]);
         });
     }, 'blog');
+}
+//添加关注
+function addAttention(req,res){
+    console.log("now at addattention");
+    var followingid = req.body.userid;
+    var followedid = req.body.followedid;
+    db(function(con){
+        var sql = 'insert into followlist(followingid,followedid) values (\''+followingid+'\',\''+followedid+'\');';
+        con.query(sql,function(err,rows){
+            if(err){
+                console.log(err);
+                return;
+            }
+            res.send("add");
+        })
+    },'blog');
+}
+function ifAttention(req,res){
+    var followingid = req.body.userid;
+    var followedid = req.body.followedid;
+    db(function(con){
+        var sql = 'select * from followlist where followingid='+followingid+' and followedid='+followedid+';';
+        con.query(sql,function(err,rows){
+           if(err){
+               console.log(err);
+           }
+           res.send(rows);
+        });
+    },'blog');
+}
+function cancelAttention(req,res){
+    var followingid = req.body.userid;
+    var followedid = req.body.followedid;
+    db(function(con){
+        var sql = 'delete from followlist where followingid='+followingid+' and followedid='+followedid+';';
+        con.query(sql,function(err,rows){
+            if(err){
+                console.log(err);
+            }
+            res.send("cancel");
+        });
+    },'blog');
 }
 module.exports = User;
