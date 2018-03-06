@@ -79,6 +79,7 @@ body {
 }
 .right .comment .com .com-list li {
   padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 .left {
   width: 20%;

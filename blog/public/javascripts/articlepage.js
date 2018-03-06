@@ -3,6 +3,7 @@ $(function () {
     var userid = getUrlParameter("userid");
     var username = getUrlParameter("username");
     var articleid = getUrlParameter("articleid");
+    //请求文章内容
     $.ajax({
         url: '/article/getdetail',
         type: 'post',
@@ -20,13 +21,34 @@ $(function () {
             return;
         }
     });
+    //发表评论
     $(".issue").click(function () {
         var comment = $("#comment").val();
+        var timeA = new Date();
+        var time = timeA.toLocaleDateString();
         if (comment == "") {
             alert("请填写评论");
         }
         else {
-            alert(comment);
+            $.ajax({
+                url:'/comment/article',
+                type:'post',
+                data:{
+                    action:'articlecomment',
+                    userid:userid,//评论者id
+                    articleid:articleid,
+                    comment:comment,
+                    time:time
+                },
+                success:function(data){
+                    if(data == "success"){
+                        alert("发布成功");
+                    }
+                },
+                error:function(err){
+
+                }
+            });
         }
     });
 });
