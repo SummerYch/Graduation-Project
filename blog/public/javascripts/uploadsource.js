@@ -1,7 +1,8 @@
 $(function () {
     
     var userid = getUrlParameter("userid");
-    var username = getUrlParameter("username");
+    var usernameA = getUrlParameter("username");
+    var username = decodeURI(usernameA);
     $("#file").change(function () {
         var file = $("#file")[0].files[0];
         var filename = file.name;

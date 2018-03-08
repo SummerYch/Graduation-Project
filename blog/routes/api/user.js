@@ -22,4 +22,10 @@ router.post('/cancelattention',function(req,res){
 router.post('/ifattention',function(req,res){
     User(req,res);
 });//判断是否关注
+router.post('/getconcern',function (req,res) {
+    User(req,res);
+});//获取关注的用户
+router.post('/gethimname',function (req,res) {
+    User(req,res);
+});//获取博客所属用户名
 module.exports = router;

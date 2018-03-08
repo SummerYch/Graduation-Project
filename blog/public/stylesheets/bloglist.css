@@ -39,7 +39,19 @@
   margin: 0 auto;
 }
 .container .content ul li {
-  padding: 20px 0 20px 5px;
-  border-bottom: 1px dashed #f0f0f0;
+  padding: 10px 0 5px 5px;
+  border-bottom: 1px dashed #5d5d5da8;
   box-sizing: border-box;
+}
+.content .article ul li{
+  cursor: pointer;
+}
+.content .article .title{
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+}
+.content .article .time{
+  font-size: 14px;
+  color: #8d8d8d;
 }

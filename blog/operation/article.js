@@ -33,6 +33,12 @@ function article(req, res) {
     if(req.body.action === 'getuser'){
         getUser(req,res);
     }
+    if(req.body.action == 'gethimarticle'){
+        getHimArticle(req,res);
+    }
+    if(req.body.action == 'addcollect'){
+        addCollect(req,res);
+    }
 }
 function writeBlog(req, res) {
     console.log("in writeblog");
@@ -256,7 +262,7 @@ function articleNotPass(req, res) {
 }
 function indexGetArticle(req,res){
     db(function(con){
-        var sql = 'select * from articlelist;';
+        var sql = 'select * from articlelist where status=1;';
         con.query(sql,function(err,rows){
             if(err){
                 console.log(err);
@@ -276,6 +282,35 @@ function getUser(req,res){
             }
             res.send(rows);
         });
+    },'blog');
+}
+function getHimArticle(req,res) {
+    var himid = req.body.himid;
+    db(function(con){
+        var sql = 'select * from articlelist where id='+himid+';';
+        con.query(sql,function(err,rows){
+           if(err){
+               console.log(err);
+               return;
+           }
+           console.log(rows);
+           res.send(rows);
+        });
+    },'blog');
+}
+function addCollect(req,res) {
+    var userid = req.body.userid;
+    var username = req.body.username;
+    var articleid = req.body.articleid;
+    db(function(con){
+        var sql = 'insert into articlecollection(collecterid,collectername,articleid) values(\''+userid+'\',\''+username+'\',\''+articleid+'\');';
+        con.query(sql,function (err,rows) {
+            if(err){
+                console.log(err);
+                return;
+            }
+            res.send("success");
+        })
     },'blog');
 }
 module.exports = article;

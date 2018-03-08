@@ -45,4 +45,12 @@ router.post('/indexgetarticle',function(req,res){
 router.post('/getuser',function(req,res){
    article(req,res);
 });
+//博客页获取文章
+router.post('/gethimarticle',function (req,res) {
+    article(req,res);
+});
+//收藏文章
+router.post('/addcollect',function (req,res) {
+   article(req,res);
+});
 module.exports = router;

@@ -2,7 +2,8 @@ $(function () {
     clickEvents();
     //写博客,提交
     var userid = getUrlParameter("userid");
-    var username = getUrlParameter("username");
+    var usernameA = getUrlParameter("username");
+    var username = decodeURI(usernameA);
     $(".article-submit").click(function () {
         var articleTitle = $("#article-title").val();
         var article = $("#article").val();
@@ -221,7 +222,8 @@ $(function () {
     });
     //点击标题显示文章内容
     $(".article-table").on("click", ".title", function () {
-        window.location.href = "/articleDetail?userid=" + userid + "&username=" + username + "&articleid=" + $(this).attr("value");
+        // window.location.href = "/articlepage?userid=" + userid + "&username=" + username + "&articleid=" + $(this).attr("value");
+        window.open("/articlepage?userid=" + userid + "&username=" + username + "&articleid=" + $(this).attr("value"));
     });
     //文章列表 操作
     $(".article-table").on("click", ".delete", function () {

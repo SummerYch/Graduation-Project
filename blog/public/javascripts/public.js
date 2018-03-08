@@ -1,6 +1,7 @@
 $(function () {
     var userId = getUrlParameter("userid");
-    var username = getUrlParameter("username");
+    var usernameA = getUrlParameter("username");
+    var username = decodeURI(usernameA);
     $(".user").children("span").html(username);
     $('.user').mouseenter(function () {
         $('.operating').fadeIn();
@@ -14,6 +15,9 @@ $(function () {
     $(".personal-center").click(function () {
         window.location.href = '/personalCenter?userid=' + userId + '&username=' + username;
     });
+    $(".myblog").click(function () {
+       window.location.href = '/articleDetail?userid='+userId+'&username='+username;
+    });
     $(".logo").click(function () {
         window.location.href = '/?userid=' + userId + '&username=' + username;
     })
@@ -22,10 +26,15 @@ $(function () {
 
 function getUrlParameter(value) {
     var arr = window.location.search.split("?")[1];
-    var paraArr = arr.split("&");
-    for (var i = 0; i < paraArr.length; i++) {
-        if (value == paraArr[i].split("=")[0]) {
-            return paraArr[i].split("=")[1];
+    if(arr){
+        var paraArr = arr.split("&");
+        for (var i = 0; i < paraArr.length; i++) {
+            if (value == paraArr[i].split("=")[0]) {
+                return paraArr[i].split("=")[1];
+            }
         }
+    }
+    else{
+        return "";
     }
 }

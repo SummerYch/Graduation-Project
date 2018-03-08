@@ -1,24 +1,36 @@
 $(function () {
     clickEvent();
-    var articleid = getUrlParameter("articleid");
-    //获取对应id的文章内容
+    var userId = getUrlParameter("userid");
+    var usernameA = getUrlParameter("username");
+    var username = decodeURI(usernameA);
+    var himid = getUrlParameter("himid");
+    //获取himid名
     $.ajax({
-        url:'/article/getdetail',
+        url:'/user/gethimname',
         type:'post',
         data:{
-            action:'getdetail',
-            articleid:articleid
+            action:'gethimname',
+            himid:himid
         },
-        success:function(data){
+        success:function (data) {
             console.log(data);
-            $(".article-title").html(data[0].article_title);
-            $(".uploadtime").html(data[0].uploadtime);
-            $(".content").html(data[0].article_content);
+            for(var i=0;i<data.length;i++){
+                $(".content .article ul").append("<li>\n" +
+                    "                        <div class=\"title\" value='"+data[i].id+"'>"+data[i].article_title+"</div>\n" +
+                    "                        <div class=\"time\">"+data[i].uploadtime+"</div>\n" +
+                    "                    </li>");
+            }
+
         },
-        error:function(err){
+        error:function (err) {
             console.log(err);
         }
     });
+    //点击文章跳转
+    $(".content .article ul").on("click","li",function () {
+        var articleid = $(this).children(".title").attr("value");
+        window.open("/articlepage?userid="+userId+"&username="+username+"&articleid="+articleid);
+    })
 })
 function clickEvent() {
     $(".tabs div").each(function () {

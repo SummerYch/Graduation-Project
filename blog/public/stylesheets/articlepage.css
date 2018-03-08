@@ -137,3 +137,6 @@ body {
   text-align: center;
   color: #3e3e3e;
 }
+.clicked{
+    color: rgb(222,104,109) !important;
+}

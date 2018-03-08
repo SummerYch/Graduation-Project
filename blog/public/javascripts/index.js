@@ -10,10 +10,9 @@ $(function () {
     });
     // 获取 url中参数
     var userId = getUrlParameter("userid");
-    var username = getUrlParameter("username");
+    var usernameA = getUrlParameter("username");
+    var username = decodeURI(usernameA);
     if (userId) {
-        console.log(userId);
-        console.log(username);
         $(".lo-re").removeClass("show").addClass("hide");
         $(".user").removeClass("hide").addClass("show");
         $(".user").children("span").html(username);
@@ -28,13 +27,12 @@ $(function () {
             action:'indexgetarticle'
         },
         success: function (data) {
-            console.log(data);
             for(var i=0;i<data.length;i++){
                 $(".recommend ul").append(" <li class=\"art-li\">"
                 +"<div class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</div>"
                 +"<div class=\"info\">"
-                    +"<span class=\"sp author\" value=\"\">"+data[i].username+"</span>"
-                    +"<span class=\"sp time\">"+data[i].uploadtime+"</span>"
+                    +"<span class=\"sp author\" value=\"\">作者："+data[i].username+"</span>"
+                    +"<span class=\"sp time\">时间："+data[i].uploadtime+"</span>"
                 +"</div>"
             +"</li>");
             }

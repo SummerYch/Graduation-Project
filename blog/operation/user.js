@@ -22,6 +22,12 @@ function User(req, res) {
     if(req.body.action === 'cancelattention'){
         cancelAttention(req,res);
     }
+    if(req.body.action === 'getconcern'){
+        getConcern(req,res);
+    }
+    if(req.body.action === 'gethimname'){
+        getHimName(req,res);
+    }
 }
 // 注册
 function register(req, res) {
@@ -207,6 +213,62 @@ function cancelAttention(req,res){
                 console.log(err);
             }
             res.send("cancel");
+        });
+    },'blog');
+}
+function getConcern(req,res){
+    var userid = req.body.userid;
+    db(function(con){
+        var sql = 'select * from followlist where followingid='+userid;
+        con.query(sql,function(err,rows){
+           if(err){
+               console.log(err);
+               return;
+           }
+           var followedid = [];
+           for(var i=0;i<rows.length;i++){
+               followedid.push(rows[i].followedid);
+           }
+           console.log(followedid);
+           var concerned = [];
+           var l = followedid.length;
+           for(var j=0;j<followedid.length;j++){
+               var id = followedid[j];
+               Username(function(rows,id,l,res){
+                   concerned.push({id:id,username:rows[0].username});
+                   console.log(concerned);
+                   if(concerned.length == l){
+                       res.send(concerned);
+                   }
+               },id,j,l,res);
+           }
+        });
+    },'blog');
+}
+function Username(cb,id,j,l,res) {
+    db(function (con) {
+        var sql1 = 'select * from user where id='+id+';';
+        con.query(sql1,function(err1,rows1){
+            if(err1){
+                console.log(err1);
+                return;
+            }
+            cb(rows1,id,l,res);
+        });
+    },'blog');
+}
+function getHimName(req,res) {
+    console.log("in gethimname");
+    var himid = req.body.himid;
+    db(function(con){
+        var sql = 'select * from articlelist where userid='+himid+';';
+        con.query(sql,function(err,rows){
+           if(err){
+               console.log(err);
+               return;
+           }
+           console.log(rows);
+           res.send(rows);
         });
     },'blog');
 }

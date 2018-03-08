@@ -1,7 +1,8 @@
 $(function () {
     mouseEvent();
     var userid = getUrlParameter("userid");
-    var username = getUrlParameter("username");
+    var usernameA = getUrlParameter("username");
+    var username = decodeURI(usernameA);
     var articleid = getUrlParameter("articleid");
     //请求文章内容
     $.ajax({
@@ -53,7 +54,7 @@ $(function () {
         }
     });
     //获取文章评论
-    var x = ":";
+
     $.ajax({
         url:'/comment/getcomment',
         type:'post',
@@ -63,6 +64,7 @@ $(function () {
         },
         success:function (data) {
             for(var i=0;i<data.length;i++){
+                var x = ":";
                 $(".com-list ul").append(" <li class=\"clearfix\">\n" +
                     "                                <div class=\"replyC clearfix\">\n" +
                     "                                    <div class=\"replyA\">\n" +
@@ -96,9 +98,9 @@ $(function () {
         },
         success:function(data){
             $(".name").html(data[0].username);
-            $(".name").attr("value",userid);
+            $(".name").attr("value",data[0].userid);
             //判断是否被关注
-            ifAttentioned(userid);
+            ifAttentioned(data[0].userid);
         },
         error:function(err){
             console.log(err);
@@ -152,6 +154,29 @@ $(function () {
            })
        }
     });
+    //收藏文章，取消收藏文章
+    $(".collect").click(function () {
+        $.ajax({
+            url:'/article/addcollect',
+            type:'post',
+            data:{
+                action:'addcollect',
+                userid:userid,
+                username:username,
+                articleid:articleid
+            },
+            success:function (data) {
+                console.log(data);
+                if(data == 'success'){
+                    $(".collect").addClass("clicked");
+                    $(".collect").children("i").attr("class", "fa fa-bookmark");
+                }
+            },
+            error:function (err) {
+                console.log(err);
+            }
+        });
+    })
 
 });
 function ifAttentioned(id) {
@@ -168,6 +193,7 @@ function ifAttentioned(id) {
         success:function(data){
             if(data.length == 0){
                 $(".attention").attr("value","0");
+
             }else{
                 $(".attention").attr("value","1");
                 $(".attention").addClass("attentioned");
