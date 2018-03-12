@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下载资源页</title>
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/public.css">
+    <link rel="stylesheet" href="stylesheets/downloadsource.css">
+    <link rel="stylesheet" href="stylesheets/font-awesome-4.7.0/css/font-awesome.css">
+</head>
+<body>
+<nav class="clearfix">
+    <div class="logo">
+        <img src="images/yearlogo2.png" alt="">
+    </div>
+    <span>推荐</span>
+    <span class="d-source">资源大本营</span>
+    <div class="lo-re show">
+        <a href="/login" id="login">登录</a>
+        <a href="/register" id="register">注册</a>
+    </div>
+    <div class="user hide">
+        <i class="fa fa-user-circle-o"></i> &nbsp;
+        <span>username</span>
+        <div class="operating hide">
+            <ul>
+                <li class="personal-center">个人中心</li>
+                <li class="writeblog">写博客</li>
+                <!--<li class="myblog">我的博客</li>-->
+                <li>退出登录</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="right">
+        <div class="collect-comment">
+            <div class="c-c collect" value="0">
+                <i class="fa fa-bookmark" value="true"></i>
+
+            </div>
+            <div class="c-c c-comment">
+                <i class="fa fa-commenting" value="false"></i>
+
+            </div>
+        </div>
+        <div class="source">
+            <p class="sourcename"></p>
+            <p class="uploadtime"></p>
+            <button class="download">下载</button>
+        </div>
+        <div class="comment">
+            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+            <button class="issue">发布评论</button>
+            <div class="com">
+                <div class="com-list">
+                    <ul class="commentlist">
+                        <!--<li class="clearfix"><div class="replyC clearfix"><div class="replyA"><span class="name">admin:</span><span class="con">good!</span></div><div class="replyB"><i class="fa fa-commenting-o"></i> 回复</div></div><div class="time">时间：2017.1</div></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="left">
+        <div class="avatar">
+
+        </div>
+        <div class="name"></div>
+        <p class="attention" value="0">加关注</p>
+    </div>
+</div>
+<script src="javascripts/plugins/jquery-1.11.1.min.js"></script>
+<script src="javascripts/public.js"></script>
+<script src="javascripts/downloadsource.js"></script>
+</body>
+</html>

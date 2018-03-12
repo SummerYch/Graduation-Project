@@ -39,6 +39,16 @@ function article(req, res) {
     if(req.body.action == 'addcollect'){
         addCollect(req,res);
     }
+    if(req.body.action == 'ifcollected'){
+        ifCollected(req,res);
+    }
+    if(req.body.action == 'cancelcollect'){
+        console.log("###################3");
+        cancelCollection(req,res);
+    }
+    if(req.body.action == 'geticollect'){
+        getICollect(req,res);
+    }
 }
 function writeBlog(req, res) {
     console.log("in writeblog");
@@ -311,6 +321,70 @@ function addCollect(req,res) {
             }
             res.send("success");
         })
+    },'blog');
+}
+function ifCollected(req,res){
+    console.log("now in ifcollected");
+    var collecterid = req.body.collecterid;
+    var articleid = req.body.articleid;
+    db(function(con){
+        var sql = 'select * from articlecollection where collecterid='+collecterid+' and articleid='+articleid+';';
+        con.query(sql,function(err,rows){
+           if(err){
+               console.log(err);
+               return;
+           }
+           res.send(rows);
+        });
+    },'blog');
+}
+function cancelCollection(req,res) {
+    console.log("now in cancelcollection");
+    var collecterid = req.body.userid;
+    var articleid = req.body.articleid;
+    db(function(con){
+        var sql = 'delete from articlecollection where collecterid='+collecterid+' and articleid='+articleid+';';
+        con.query(sql,function(err,rows){
+            if(err){
+                console.log(err);
+                return;
+            }
+            res.send("success");
+        })
+    },'blog');
+}
+function getICollect(req,res){
+    var userid = req.body.userid;
+    db(function(con){
+        var sql = 'select * from articlecollection where collecterid='+userid+';';
+        con.query(sql,function(err,rows){
+           if(err){
+               console.log(err);
+               return;
+           }
+           var article = [];
+           var l = rows.length;
+            for(var i=0;i<rows.length;i++){
+                byCollectionGetArticle(function (rows,res,l) {
+                    article.push(rows[0]);
+                    if(article.length == l){
+                        res.send(article);
+                    }
+                },rows[i].articleid,res,l);
+            }
+        });
+    },'blog');
+}
+function byCollectionGetArticle(cb,id,res,l) {
+    db(function (con) {
+        var sql = 'select * from articlelist where id='+id+';';
+        con.query(sql,function(err,rows){
+            if(err){
+                console.log(err);
+                return;
+            }
+            cb(rows,res,l);
+        });
     },'blog');
 }
 module.exports = article;

@@ -227,3 +227,18 @@ body {
   margin-left: 10px;
   float: left;
 }
+.con4 ul li{
+  padding: 5px 20px;
+  box-sizing: border-box;
+  border-bottom:1px dotted gray;
+  cursor: pointer;
+}
+.con4 .title{
+  font-size: 22px;
+  font-weight: bold;
+}
+.con4 .sp{
+  margin-right: 20px;
+  font-size: 16px;
+  color:#5d5d5d;
+}

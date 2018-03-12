@@ -38,19 +38,31 @@ router.post('/notpass', function (req, res) {
     article(req, res);
 });
 //首页获取文章
-router.post('/indexgetarticle',function(req,res){
-    article(req,res);
+router.post('/indexgetarticle', function (req, res) {
+    article(req, res);
 });
 //通过文章获取用户获取用户
-router.post('/getuser',function(req,res){
-   article(req,res);
+router.post('/getuser', function (req, res) {
+    article(req, res);
 });
 //博客页获取文章
-router.post('/gethimarticle',function (req,res) {
-    article(req,res);
+router.post('/gethimarticle', function (req, res) {
+    article(req, res);
 });
 //收藏文章
-router.post('/addcollect',function (req,res) {
+router.post('/addcollect', function (req, res) {
+    article(req, res);
+});
+//取消收藏文章
+router.post('/cancelcollection', function (req, res) {
+    article(req, res);
+});
+//判断文章是否已经收藏
+router.post('/ifcollected', function (req, res) {
+    article(req, res);
+});
+//获取我收藏的文章
+router.post('/geticollect',function(req,res){
    article(req,res);
 });
 module.exports = router;

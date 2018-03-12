@@ -90,7 +90,7 @@ body {
   cursor: pointer;
   float: right;
 }
-.right .comment .com .com-list li .replyC .name{
+.right .comment .com .com-list li .replyC .com-name{
   font-size: 16px;
   font-weight: bold;
   color: #8d8d8d;

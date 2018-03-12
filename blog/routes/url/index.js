@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var path = require("path");
+var fs = require("fs");
 
 router.get('/', function (req, res) {
     res.render('index', {
@@ -44,4 +46,30 @@ router.get('/verify',function(req,res){
 router.get('/articlepage',function(req,res){
     res.render('articlepage');
 })
+router.get('/sourceBaseCamp',function (req,res) {
+    res.render('sourceBaseCamp');
+})
+router.get('/downloadsource',function(req,res){
+    res.render('downloadsource');
+})
+router.get('/download', function (req, res, next) {
+    var filepath = req.query.sourcepath;
+    var filename = filepath.split("-")[1];
+    fs.stat(filepath, function (err, stats) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log(stats.isFile());
+        if (stats.isFile()) {
+            res.writeHead(200, {
+                'Content-Type': 'application/force-download',
+                'Content-Disposition': 'attachment; filename=' + encodeURI(filename),
+            });
+            fs.createReadStream(filepath).pipe(res);
+        } else {
+            res.end(404);
+        }
+    })
+});
 module.exports = router;

@@ -5,52 +5,61 @@
     <meta charset="UTF-8">
     <meta name="referrer" content="no-referrer" />
     <title>IT资源大本营</title>
-    <link rel="stylesheet" href="../public/stylesheets/base.css">
-    <link rel="stylesheet" href="../public/stylesheets/public.css">
-    <link rel="stylesheet" href="../public/stylesheets/sourceBaseCamp.css">
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/public.css">
+    <link rel="stylesheet" href="stylesheets/sourceBaseCamp.css">
+    <link rel="stylesheet" href="stylesheets/font-awesome-4.7.0/css/font-awesome.css">
 </head>
 
 <body>
-    <nav>
-        <span>推荐</span>
-        <span>下载</span>
-    </nav>
-    <div class="container">
+<nav class="clearfix">
+    <div class="logo">
+        <img src="images/yearlogo2.png" alt="">
+    </div>
+    <span>推荐</span>
+    <span class="d-source">资源大本营</span>
+    <div class="lo-re show">
+        <a href="/login" id="login">登录</a>
+        <a href="/register" id="register">注册</a>
+    </div>
+    <div class="user hide">
+        <i class="fa fa-user-circle-o"></i> &nbsp;
+        <span>username</span>
+        <div class="operating hide">
+            <ul>
+                <li class="personal-center">个人中心</li>
+                <li class="writeblog">写博客</li>
+                <!--<li class="myblog">我的博客</li>-->
+                <li>退出登录</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
         <div class="left">
-            <div class="top">
-                <span>关键字:</span>
-                <input type="text">
-                <button>搜索</button>
-            </div>
+            <!--<div class="top">-->
+                <!--<span>关键字:</span>-->
+                <!--<input type="text">-->
+                <!--<button>搜索</button>-->
+            <!--</div>-->
             <div class="source-list">
                 <ul>
-                    <li class="clearfix">
-                        <div class="li-left">
-                            <img src="//csdnimg.cn/release/download/old_static/images/minetype/unkonw.svg" alt="">
-                        </div>
-                        <div class="li-right">
-                            <h3>这里是资源标题</h3>
-                            <div class="details clearfix">
-                                <p>资源大小:
-                                    <span class="source-size">2314</span>
-                                </p>
-                                <p>上传时间:
-                                    <span class="upload-time">23424</span>
-                                </p>
-                                <p>上传者:
-                                    <span class="uploader">5642</span>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>2</li>
+                    <!--<li class="clearfix">-->
+                       <!--<div class="title">123</div>-->
+                        <!--<div class="detail">-->
+                            <!--<span class="author">123</span>-->
+                            <!--<span class="uploadtime">123</span>-->
+                        <!--</div>-->
+                    <!--</li>-->
                 </ul>
             </div>
         </div>
-        <div class="right">
-
-        </div>
     </div>
+
+<script src="javascripts/plugins/jquery-1.11.1.min.js"></script>
+<script src="javascripts/public.js"></script>
+<script src="javascripts/sourceBaseCamp.js"></script>
 </body>
 
 </html>

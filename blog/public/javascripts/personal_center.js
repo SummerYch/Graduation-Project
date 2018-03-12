@@ -82,7 +82,7 @@ $(function () {
             console.log(err);
         }
     });
-    //我的关注
+    //我的关注按钮点击切换
     $(".btn:eq(0)").click(function () {
         $(this).addClass("active-btn");
         $(".i-concern").removeClass("hide").addClass("show");
@@ -97,30 +97,58 @@ $(function () {
     });
     //我的关注
     $.ajax({
-        url:'user/getconcern',
-        type:'post',
-        data:{
-            action:'getconcern',
-            userid:userId
+        url: 'user/getconcern',
+        type: 'post',
+        data: {
+            action: 'getconcern',
+            userid: userId
         },
-        success:function (data) {
-            console.log(data);
-            for(var i=0;i<data.length;i++){
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
                 $(".i-concern").append(" <li class=\"clearfix\">\n" +
                     "                            <div class=\"avatar\">\n" +
                     "                                <img src=\"images/1.jpg\" alt=\"\">\n" +
                     "                            </div>\n" +
-                    "                            <div class=\"name\" value='"+data[i].id+"'>"+data[i].username+"</div>\n" +
+                    "                            <div class=\"name\" value='" + data[i].id + "'>" + data[i].username + "</div>\n" +
                     "                        </li>");
             }
         },
-        error:function(err){
+        error: function (err) {
             console.log("error");
         }
     });
     //点击关注跳转到相应主页
-    $(".i-concern").on("click","li",function(){
+    $(".i-concern").on("click", "li", function () {
         var himid = $(this).children(".name").attr("value");
-        window.open('/articleDetail?userid='+userId+'&username='+username+'&himid='+himid);
+        window.open('/articleDetail?userid=' + userId + '&username=' + username + '&himid=' + himid);
+    });
+    //我收藏的文章
+    $.ajax({
+        url: '/article/geticollect',
+        type: 'post',
+        data: {
+            action: 'geticollect',
+            userid: userId
+        },
+        success: function (data) {
+            console.log(data);
+            for(var i=0;i<data.length;i++){
+                $(".con4 ul").append("<li>\n" +
+                    "                            <div class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</div>\n" +
+                    "                            <div class=\"info\">\n" +
+                    "                                <span class=\"sp author\">"+data[i].username+"</span>\n" +
+                    "                                <span class=\"sp time\">"+data[i].uploadtime+"</span>\n" +
+                    "                            </div>\n" +
+                    "                        </li>");
+            }
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+    //我收藏的文章点击跳转
+    $(".con4 ul").on("click","li",function(){
+        var articleid = $(this).children(".title").attr("value");
+        window.open('/articlepage?userid='+userId+'&username='+username+'&articleid='+articleid);
     });
 })

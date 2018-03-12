@@ -2,6 +2,10 @@ $(function () {
     var userId = getUrlParameter("userid");
     var usernameA = getUrlParameter("username");
     var username = decodeURI(usernameA);
+    if(userId != ""){
+        $(".lo-re").removeClass("show").addClass("hide");
+        $(".user").removeClass("hide").addClass("show");
+    }
     $(".user").children("span").html(username);
     $('.user').mouseenter(function () {
         $('.operating').fadeIn();
@@ -20,7 +24,10 @@ $(function () {
     });
     $(".logo").click(function () {
         window.location.href = '/?userid=' + userId + '&username=' + username;
-    })
+    });
+    $(".d-source").click(function () {
+        window.location.href = '/sourceBaseCamp?userid='+userId+'&username='+username;
+    });
 })
 
 

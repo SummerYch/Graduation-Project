@@ -27,7 +27,8 @@ function upload(req, res, fields, files) {
     var userid = fields.userid;
     fs.renameSync(files.file.path, "./file/" + y + "_" + m + "_" + d + "_" + t + "_" + userid + "-" + files.file.name);
     var filepath = "./file/" + y + "_" + m + "_" + d + "_" + t + "_" + userid + "-" + files.file.name;
-    var filename = files.file.name;
+    // var filename = files.file.name;
+    var filename = y + "_" + m + "_" + d + "_" + t + "_" + userid + "-" + files.file.name;
     var username = fields.username;
     var uploadtime = fields.uploadtime;
     var keyword = fields.keyword;

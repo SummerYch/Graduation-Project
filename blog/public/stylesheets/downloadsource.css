@@ -1,0 +1,162 @@
+body {
+    background: url("../images/bg-yellow.png") repeat;
+}
+.container {
+    position: relative;
+    overflow: visible;
+}
+.right {
+    position: relative;
+    width: 79%;
+    background: #fff;
+    float: left;
+    overflow-y: scroll;
+}
+.right .collect-comment {
+    position: fixed;
+    left: 5px;
+    top: 200px;
+    width: 50px;
+    height: 120px;
+}
+.right .collect-comment .c-c {
+    margin-top: 10px;
+    width: 42px;
+    height: 42px;
+    color: #788087;
+    font-size: 24px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
+.right .title {
+    width: 100%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e5e5e5;
+}
+.right .title p {
+    margin-top: 15px;
+    color: #bbb;
+    font-size: 14px;
+}
+.right .content {
+    padding: 15px;
+    width: 100%;
+    font-size: 22px;
+    text-indent: 2em;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
+    box-sizing: border-box;
+}
+.right .comment {
+    width: 100%;
+    padding: 10px 10px;
+    box-sizing: border-box;
+}
+.right .comment #comment {
+    width: 80%;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid #ac2b2b;
+}
+.right .comment .issue {
+    position: relative;
+    left: 0;
+    top: -15px;
+    width: 80px;
+    height: 40px;
+    color: white;
+    background: #e40f0f;
+    cursor: pointer;
+}
+.right .comment .com {
+    width: 100%;
+    border-top: 2px solid #788087;
+}
+.right .comment .com .com-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.right .comment .com .com-list li .replyC .replyA{
+    float: left;
+}
+.right .comment .com .com-list li .replyB{
+    color: #8d8d8d;
+    font-size: 14px;
+    cursor: pointer;
+    float: right;
+}
+.right .comment .com .com-list li .replyC .com-name{
+    font-size: 16px;
+    font-weight: bold;
+    color: #8d8d8d;
+}
+.right .comment .com .com-list li .time{
+    margin-top: 7px;
+    font-size: 14px;
+    color: #b9b5ae;
+}
+.left {
+    width: 20%;
+    margin-left: 9px;
+    padding: 10px 10px;
+    float: left;
+    background: #fff;
+    box-sizing: border-box;
+}
+.left .avatar{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+.left .attention{
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    margin:10px auto;
+    font-size: 14px;
+    color: #5d5d5d;
+    border: 1px solid #f59701;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.left .attention:hover{
+    background: #f5d70c;
+}
+.attentioned{
+    background: #f5d70c;
+}
+.left .name{
+    margin-top: 5px;
+    text-align: center;
+    color: #3e3e3e;
+}
+.sourcename{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+.uploadtime{
+    font-size: 16px;
+    padding: 5px 10px;
+    color: #999999;
+}
+.download{
+    margin: 5px 10px;
+    width: 120px;
+    height: 40px;
+    background: #e33f3f;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+.clicked{
+    color: rgb(222,104,109) !important;
+}
