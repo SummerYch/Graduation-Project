@@ -4,7 +4,9 @@ $(function () {
     var usernameA = getUrlParameter("username");
     var username = decodeURI(usernameA);
     var himid = getUrlParameter("himid");
-    //获取himid名
+    var himname = decodeURI(getUrlParameter("himname"));
+    $(".article-title").html(himname+"的博客");
+    //获取himid文章
     $.ajax({
         url:'/user/gethimname',
         type:'post',
@@ -30,8 +32,35 @@ $(function () {
     $(".content .article ul").on("click","li",function () {
         var articleid = $(this).children(".title").attr("value");
         window.open("/articlepage?userid="+userId+"&username="+username+"&articleid="+articleid);
-    })
-})
+    });
+    //获取资源
+    $.ajax({
+        url:'/source/gethimsource',
+        type:'post',
+        data:{
+            action:'gethimsource',
+            userid:himid
+        },
+        success:function (data) {
+            console.log(data);
+            for(var i=0;i<data.length;i++){
+                var sourcename = data[i].sourcename.split("-")[1];
+                $(".source ul").append("<li>\n" +
+                    "                        <p class=\"name\" value='"+data[i].id+"'>"+sourcename+"</p>\n" +
+                    "                        <p class=\"time\">"+data[i].uploadtime+"</p>\n" +
+                    "                    </li>");
+            }
+        },
+        error:function () {
+            console.log("error");
+        }
+    });
+    //点击资源跳转下载页
+    $(".source ul").on("click","li",function () {
+        var sourceid = $(this).children(".name").attr("value");
+        window.open('/downloadsource?userid='+userId+'&username='+username+'&sourceid='+sourceid);
+    });
+});
 function clickEvent() {
     $(".tabs div").each(function () {
         $(this).click(function () {

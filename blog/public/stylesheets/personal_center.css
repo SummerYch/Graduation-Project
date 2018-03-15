@@ -160,7 +160,7 @@ body {
   width: 100%;
 }
 .bottom .title ul li {
-  width: 25%;
+  width: 33.333333333%;
   height: 40px;
   line-height: 40px;
   text-align: center;
@@ -227,6 +227,25 @@ body {
   margin-left: 10px;
   float: left;
 }
+.bottom .content .con1 .concern-i li{
+    padding: 10px;
+    width: 18%;
+    float: left;
+    margin: 12px;
+    border: 1px solid #f0f0f0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.bottom .content .con1 .concern-i .avatar{
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+.bottom .content .con1 .concern-i .name{
+    width: 60%;
+    margin-left: 10px;
+    float: left;
+}
 .con4 ul li{
   padding: 5px 20px;
   box-sizing: border-box;
@@ -238,6 +257,21 @@ body {
   font-weight: bold;
 }
 .con4 .sp{
+  margin-right: 20px;
+  font-size: 16px;
+  color:#5d5d5d;
+}
+.con5 ul li{
+  padding: 5px 20px;
+  box-sizing: border-box;
+  border-bottom:1px dotted gray;
+  cursor: pointer;
+}
+.con5 .title{
+  font-size: 22px;
+  font-weight: bold;
+}
+.con5 .sp{
   margin-right: 20px;
   font-size: 16px;
   color:#5d5d5d;

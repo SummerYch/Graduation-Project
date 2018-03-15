@@ -46,5 +46,10 @@ $(function () {
         var articleid = $(this).children(".title").attr("value");
         window.open('/articlepage?userid='+userId+'&username='+username+'&articleid='+articleid);
     });
+    //点击搜索
+    $(".sea-btn").click(function () {
+        var seVal = $(".search").val();
+        window.open('/search?userid='+userId+'&username='+username+'&keyword='+seVal);
+    })
 })
 

@@ -48,7 +48,6 @@ $(function () {
             type: "post",
             data: data,
             success: function (data) {
-                console.log(data);
                 if (data == "success") {
                     alert("修改信息成功");
                     $(".mask").slideUp();
@@ -56,6 +55,7 @@ $(function () {
                 else if (data == "failed") {
                     alert("修改信息失败");
                 }
+                window.location.reload();
             },
             error: function (err) {
                 console.log(err);
@@ -104,6 +104,7 @@ $(function () {
             userid: userId
         },
         success: function (data) {
+            $(".attention .left span").html(data.length);
             for (var i = 0; i < data.length; i++) {
                 $(".i-concern").append(" <li class=\"clearfix\">\n" +
                     "                            <div class=\"avatar\">\n" +
@@ -117,10 +118,36 @@ $(function () {
             console.log("error");
         }
     });
+    //关注我的
+    $.ajax({
+        url:'user/concerni',
+        type:'post',
+        data:{
+            action:'concerni',
+            userid:userId
+        },
+        success:function (data) {
+            $(".attention .right span").html(data.length);
+            for(var i = 0; i < data.length;i ++){
+                $(".concern-i").append(" <li class=\"clearfix\">\n" +
+                    "                            <div class=\"avatar\">\n" +
+                    "                                <img src=\"images/1.jpg\" alt=\"\">\n" +
+                    "                            </div>\n" +
+                    "                            <div class=\"name\" value='" + data[i].id + "'>" + data[i].username + "</div>\n" +
+                    "                        </li>");
+            }
+        }
+    });
     //点击关注跳转到相应主页
     $(".i-concern").on("click", "li", function () {
         var himid = $(this).children(".name").attr("value");
-        window.open('/articleDetail?userid=' + userId + '&username=' + username + '&himid=' + himid);
+        var himname = $(this).children(".name").html();
+        window.open('/articleDetail?userid=' + userId + '&username=' + username + '&himid=' + himid + '&himname='+himname);
+    });
+    $(".concern-i").on("click", "li", function () {
+        var himid = $(this).children(".name").attr("value");
+        var himname = $(this).children(".name").html();
+        window.open('/articleDetail?userid=' + userId + '&username=' + username + '&himid=' + himid + '&himname='+himname);
     });
     //我收藏的文章
     $.ajax({
@@ -131,7 +158,6 @@ $(function () {
             userid: userId
         },
         success: function (data) {
-            console.log(data);
             for(var i=0;i<data.length;i++){
                 $(".con4 ul").append("<li>\n" +
                     "                            <div class=\"title\" value=\""+data[i].id+"\">"+data[i].article_title+"</div>\n" +
@@ -151,4 +177,33 @@ $(function () {
         var articleid = $(this).children(".title").attr("value");
         window.open('/articlepage?userid='+userId+'&username='+username+'&articleid='+articleid);
     });
-})
+    //我收藏的资源
+    $.ajax({
+        url:"/source/icollect",
+        type:'post',
+        data:{
+            action:'geticollect',
+            userid:userId
+        },
+        success:function (data) {
+            for(var i=0;i<data.length;i++){
+                var sourcename = data[i].sourcename.split("-")[1];
+                $(".con5 ul").append("<li>\n" +
+                    "                            <div class=\"title\" value=\""+data[i].id+"\">"+sourcename+"</div>\n" +
+                    "                            <div class=\"info\">\n" +
+                    "                                <span class=\"sp author\">"+data[i].username+"</span>\n" +
+                    "                                <span class=\"sp time\">"+data[i].uploadtime+"</span>\n" +
+                    "                            </div>\n" +
+                    "                        </li>");
+            }
+        },
+        error:function (error) {
+            console.log("error");
+        }
+    });
+    //收藏的资源跳转
+    $(".con5 ul").on("click","li",function () {
+        var sourceid = $(this).children(".title").attr("value");
+        window.open('/downloadsource?userid='+userId+'&username='+username+'&sourceid='+sourceid);
+    })
+});

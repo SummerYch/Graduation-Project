@@ -74,3 +74,22 @@ nav .logo{
 .show {
   display: block;
 }
+.search{
+  margin-left: 20px;
+  width: 200px;
+  height: 25px;
+  padding-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #4c0404;
+}
+.sea-btn{
+  position: relative;
+  top: 2px;
+  left: 0;
+  width: 80px;
+  height: 25px;
+  color: white;
+  border-radius: 5px;
+  background: #9783b7;
+  cursor: pointer;
+}

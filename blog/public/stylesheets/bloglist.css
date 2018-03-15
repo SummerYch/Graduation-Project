@@ -42,6 +42,7 @@
   padding: 10px 0 5px 5px;
   border-bottom: 1px dashed #5d5d5da8;
   box-sizing: border-box;
+  cursor: pointer;
 }
 .content .article ul li{
   cursor: pointer;
@@ -54,4 +55,12 @@
 .content .article .time{
   font-size: 14px;
   color: #8d8d8d;
+}
+.source .name{
+  font-size: 22px;
+  font-weight: bold;
+}
+.source .time{
+  color: #5d5d5d;
+  margin-top: 5px;
 }

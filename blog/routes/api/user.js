@@ -28,4 +28,10 @@ router.post('/getconcern',function (req,res) {
 router.post('/gethimname',function (req,res) {
     User(req,res);
 });//获取博客所属用户名
+router.post('/search',function (req,res) {
+    User(req,res);
+});//搜索
+router.post('/concerni',function (req,res) {
+    User(req,res);
+});//关注我的
 module.exports = router;

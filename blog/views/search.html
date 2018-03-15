@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/public.css">
+    <link rel="stylesheet" href="stylesheets/search.css">
+    <link rel="stylesheet" href="stylesheets/font-awesome-4.7.0/css/font-awesome.css">
+</head>
+<body>
+<nav class="clearfix">
+    <div class="logo">
+        <img src="images/yearlogo2.png" alt="">
+    </div>
+    <span>推荐</span>
+    <span class="d-source">资源大本营</span>
+    <input type="text" class="search">
+    <button class="sea-btn">搜索</button>
+    <div class="lo-re show">
+        <a href="/login" id="login">登录</a>
+        <a href="/register" id="register">注册</a>
+    </div>
+    <div class="user hide">
+        <i class="fa fa-user-circle-o"></i> &nbsp;
+        <span>username</span>
+        <div class="operating hide">
+            <ul>
+                <li class="personal-center">个人中心</li>
+                <li class="writeblog">写博客</li>
+                <!--<li class="myblog">我的博客</li>-->
+                <li>退出登录</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div>
+        <button class="btn btn-author clicked">查作者</button>
+        <button class="btn btn-article">查文章</button>
+        <button class="btn btn-source">查资源</button>
+    </div>
+    <div>
+        <div class="author show">
+            <ul class="authorlist">
+
+            </ul>
+        </div>
+        <div class="article hide">
+            <ul class="articlelist">
+
+            </ul>
+        </div>
+        <div class="source hide">
+            <ul class="sourcelist">
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script src="javascripts/plugins/jquery-1.11.1.min.js"></script>
+<script src="javascripts/public.js"></script>
+<script src="javascripts/search.js"></script>
+</body>
+</html>

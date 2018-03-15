@@ -28,6 +28,12 @@ function getsource(req,res){
     if(req.body.action == 'ifcollected'){
         ifCollected(req,res);
     }
+    if(req.body.action == 'geticollect'){
+        getCollect(req,res);
+    }
+    if(req.body.action == 'gethimsource'){
+        getHimSource(req,res);
+    }
 }
 
 function getPosted(req,res){
@@ -148,5 +154,55 @@ function ifCollected(req,res){
            res.send(rows);
         });
     },'blog');
+}
+function getCollect(req,res) {
+    console.log("now in getcollect")
+    var userid = req.body.userid;
+    db(function (con) {
+        var sql = 'select * from sourcecollection where collecterid='+userid+';';
+        con.query(sql,function (err,rows) {
+            if(err){
+                console.log(err);
+                return;
+            }
+            var source = [];
+            var l = rows.length;
+            for(var i = 0;i<l;i++){
+                byIdGetSource(function (rows,l,res) {
+                    source.push(rows[0]);
+                    if(source.length === l){
+                        res.send(source);
+                    }
+                },rows[i].sourceid,l,res);
+            }
+            // res.send(rows);
+        })
+    },'blog');
+}
+function byIdGetSource(cb,id,l,res) {
+    db(function (con) {
+        var sql = 'select * from sourcelist where id='+id+';';
+        con.query(sql,function (err,rows) {
+            if(err){
+                console.log(err);
+                return;
+            }
+            cb(rows,l,res);
+        })
+    },'blog')
+}
+function getHimSource(req,res) {
+    console.log("--------------now in gethimsource-----------------");
+    var himid = req.body.userid;
+    db(function (con) {
+        var sql = 'select * from sourcelist where userid='+himid+';';
+        con.query(sql,function (err,rows) {
+           if(err){
+               console.log(err);
+               return;
+           }
+           res.send(rows);
+        });
+    },'blog')
 }
 module.exports = getsource;

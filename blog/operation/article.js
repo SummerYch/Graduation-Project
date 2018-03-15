@@ -1,4 +1,5 @@
 const db = require('../db/db');
+
 function article(req, res) {
     if (req.body.action === 'writeblog') {
         writeBlog(req, res);
@@ -30,26 +31,27 @@ function article(req, res) {
     if (req.body.action === 'indexgetarticle') {
         indexGetArticle(req, res);
     }
-    if(req.body.action === 'getuser'){
-        getUser(req,res);
+    if (req.body.action === 'getuser') {
+        getUser(req, res);
     }
-    if(req.body.action == 'gethimarticle'){
-        getHimArticle(req,res);
+    if (req.body.action == 'gethimarticle') {
+        getHimArticle(req, res);
     }
-    if(req.body.action == 'addcollect'){
-        addCollect(req,res);
+    if (req.body.action == 'addcollect') {
+        addCollect(req, res);
     }
-    if(req.body.action == 'ifcollected'){
-        ifCollected(req,res);
+    if (req.body.action == 'ifcollected') {
+        ifCollected(req, res);
     }
-    if(req.body.action == 'cancelcollect'){
+    if (req.body.action == 'cancelcollect') {
         console.log("###################3");
-        cancelCollection(req,res);
+        cancelCollection(req, res);
     }
-    if(req.body.action == 'geticollect'){
-        getICollect(req,res);
+    if (req.body.action == 'geticollect') {
+        getICollect(req, res);
     }
 }
+
 function writeBlog(req, res) {
     console.log("in writeblog");
     var articleTitle = req.body.articleTitle;
@@ -60,7 +62,7 @@ function writeBlog(req, res) {
     if (req.body.location === 'submit') {
         console.log("submit");
         db(function (con) {
-            var sql = 'insert into articlelist(userid,username,article_title,article_content,uploadtime,status) values(\'' + userid + '\',\''+username+'\',\'' + articleTitle + '\',\'' + article + '\',\'' + uploadtime + '\',\'0\');';
+            var sql = 'insert into articlelist(userid,username,article_title,article_content,uploadtime,status) values(\'' + userid + '\',\'' + username + '\',\'' + articleTitle + '\',\'' + article + '\',\'' + uploadtime + '\',\'0\');';
             con.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err);
@@ -101,6 +103,7 @@ function writeBlog(req, res) {
         }, 'blog');
     }
 }
+
 function getArticle(req, res) {
     console.log("in getArticle");
     var userid = req.body.userid;
@@ -156,6 +159,7 @@ function getArticle(req, res) {
         }, 'blog');
     }
 }
+
 function getDetail(req, res) {
     console.log("in get detail");
     var articleid = req.body.articleid;
@@ -171,6 +175,7 @@ function getDetail(req, res) {
         });
     }, 'blog');
 }
+
 function inRecycle(req, res) {
     console.log("in recycle");
     var articleid = req.body.articleid;
@@ -201,6 +206,7 @@ function inRecycle(req, res) {
         });
     }, 'blog');
 }
+
 function restore(req, res) {
     var articleid = req.body.articleid;
     var status = req.body.original_status;
@@ -216,6 +222,7 @@ function restore(req, res) {
         });
     }, 'blog');
 }
+
 function deepDelete(req, res) {
     console.log("in deepdelete");
     var articleid = req.body.articleid;
@@ -231,6 +238,7 @@ function deepDelete(req, res) {
         });
     }, 'blog');
 }
+
 function adminGetArticle(req, res) {
     db(function (con) {
         var sql = 'select * from articlelist where status=0;';
@@ -243,6 +251,7 @@ function adminGetArticle(req, res) {
         })
     }, 'blog');
 }
+
 function articlePass(req, res) {
     var articleid = req.body.articleid;
     db(function (con) {
@@ -256,6 +265,7 @@ function articlePass(req, res) {
         });
     }, 'blog');
 }
+
 function articleNotPass(req, res) {
     console.log("2");
     var articleid = req.body.articleid;
@@ -270,121 +280,130 @@ function articleNotPass(req, res) {
         });
     }, 'blog');
 }
-function indexGetArticle(req,res){
-    db(function(con){
+
+function indexGetArticle(req, res) {
+    db(function (con) {
         var sql = 'select * from articlelist where status=1;';
-        con.query(sql,function(err,rows){
-            if(err){
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
             res.send(rows);
         });
-    },'blog');
+    }, 'blog');
 }
-function getUser(req,res){
+
+function getUser(req, res) {
     var articleid = req.body.articleid;
-    db(function(con){
-        var sql = 'select * from articlelist where id='+articleid+';';
-        con.query(sql,function(err,rows){
-            if(err){
+    db(function (con) {
+        var sql = 'select * from articlelist where id=' + articleid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
             }
             res.send(rows);
         });
-    },'blog');
+    }, 'blog');
 }
-function getHimArticle(req,res) {
+
+function getHimArticle(req, res) {
     var himid = req.body.himid;
-    db(function(con){
-        var sql = 'select * from articlelist where id='+himid+';';
-        con.query(sql,function(err,rows){
-           if(err){
-               console.log(err);
-               return;
-           }
-           console.log(rows);
-           res.send(rows);
+    db(function (con) {
+        var sql = 'select * from articlelist where id=' + himid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(rows);
+            res.send(rows);
         });
-    },'blog');
+    }, 'blog');
 }
-function addCollect(req,res) {
+
+function addCollect(req, res) {
     var userid = req.body.userid;
     var username = req.body.username;
     var articleid = req.body.articleid;
-    db(function(con){
-        var sql = 'insert into articlecollection(collecterid,collectername,articleid) values(\''+userid+'\',\''+username+'\',\''+articleid+'\');';
-        con.query(sql,function (err,rows) {
-            if(err){
+    db(function (con) {
+        var sql = 'insert into articlecollection(collecterid,collectername,articleid) values(\'' + userid + '\',\'' + username + '\',\'' + articleid + '\');';
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
             res.send("success");
         })
-    },'blog');
+    }, 'blog');
 }
-function ifCollected(req,res){
+
+function ifCollected(req, res) {
     console.log("now in ifcollected");
     var collecterid = req.body.collecterid;
     var articleid = req.body.articleid;
-    db(function(con){
-        var sql = 'select * from articlecollection where collecterid='+collecterid+' and articleid='+articleid+';';
-        con.query(sql,function(err,rows){
-           if(err){
-               console.log(err);
-               return;
-           }
-           res.send(rows);
+    db(function (con) {
+        var sql = 'select * from articlecollection where collecterid=' + collecterid + ' and articleid=' + articleid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            res.send(rows);
         });
-    },'blog');
+    }, 'blog');
 }
-function cancelCollection(req,res) {
+
+function cancelCollection(req, res) {
     console.log("now in cancelcollection");
     var collecterid = req.body.userid;
     var articleid = req.body.articleid;
-    db(function(con){
-        var sql = 'delete from articlecollection where collecterid='+collecterid+' and articleid='+articleid+';';
-        con.query(sql,function(err,rows){
-            if(err){
+    db(function (con) {
+        var sql = 'delete from articlecollection where collecterid=' + collecterid + ' and articleid=' + articleid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
             res.send("success");
         })
-    },'blog');
+    }, 'blog');
 }
-function getICollect(req,res){
+
+function getICollect(req, res) {
     var userid = req.body.userid;
-    db(function(con){
-        var sql = 'select * from articlecollection where collecterid='+userid+';';
-        con.query(sql,function(err,rows){
-           if(err){
-               console.log(err);
-               return;
-           }
-           var article = [];
-           var l = rows.length;
-            for(var i=0;i<rows.length;i++){
-                byCollectionGetArticle(function (rows,res,l) {
-                    article.push(rows[0]);
-                    if(article.length == l){
-                        res.send(article);
-                    }
-                },rows[i].articleid,res,l);
-            }
-        });
-    },'blog');
-}
-function byCollectionGetArticle(cb,id,res,l) {
     db(function (con) {
-        var sql = 'select * from articlelist where id='+id+';';
-        con.query(sql,function(err,rows){
-            if(err){
+        var sql = 'select * from articlecollection where collecterid=' + userid + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
                 console.log(err);
                 return;
             }
-            cb(rows,res,l);
+            var article = [];
+            var l = rows.length;
+            for (var i = 0; i < rows.length; i++) {
+                byCollectionGetArticle(function (rows, res, l) {
+                    article.push(rows[0]);
+                    if (article.length == l) {
+                        res.send(article);
+                    }
+                }, rows[i].articleid, res, l);
+            }
         });
-    },'blog');
+    }, 'blog');
 }
+
+function byCollectionGetArticle(cb, id, res, l) {
+    db(function (con) {
+        var sql = 'select * from articlelist where id=' + id + ';';
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            cb(rows, res, l);
+        });
+    }, 'blog');
+}
+
 module.exports = article;

@@ -41,7 +41,7 @@ function articleComment(req,res){
 }
 function getComment(req,res){
     var articleid = req.body.articleid;
-    if(req.body.belongd == 'article'){
+    if(req.body.belongs == 'article'){
         db(function(con){
             var sql = 'select * from commentlist where articleorsourceid='+articleid+' and belongs=\'article\';';
             con.query(sql,function(err,rows){

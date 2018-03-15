@@ -28,6 +28,12 @@ function User(req, res) {
     if(req.body.action === 'gethimname'){
         getHimName(req,res);
     }
+    if(req.body.action === 'search'){
+        search(req,res);
+    }
+    if(req.body.action === 'concerni'){
+        concernI(req,res);
+    }
 }
 // 注册
 function register(req, res) {
@@ -269,6 +275,90 @@ function getHimName(req,res) {
            }
            console.log(rows);
            res.send(rows);
+        });
+    },'blog');
+}
+function search(req,res) {
+    var location = req.body.location;
+    var keyword = req.body.keyword;
+    switch(location)
+    {
+        case 'article':{
+            db(function (con) {
+                var sql = 'select * from articlelist where article_title like "'+keyword+'%";';
+                con.query(sql,function (err,rows) {
+                    if(err){
+                        console.log(err);
+                        return;
+                    }
+                    res.send(rows);
+                })
+            },'blog');
+            break;
+        }
+        case 'source':{
+            db(function (con) {
+                var sql = 'select * from sourcelist where sourcename like "'+keyword+'%";';
+                con.query(sql,function (err,rows) {
+                    if(err){
+                        console.log(err);
+                        return;
+                    }
+                    res.send(rows);
+                })
+            },'blog');
+            break;
+        }
+        case 'author':{
+            db(function (con) {
+                var sql = 'select * from user where username like "'+keyword+'%";';
+                con.query(sql,function (err,rows) {
+                    if(err){
+                        console.log(err);
+                        return;
+                    }
+                    console.log(rows);
+                    res.send(rows);
+                })
+            },'blog');
+            break;
+        }
+    }
+}
+function concernI(req,res){
+    console.log("############ now in concernI ###########")
+    var userid = req.body.userid;
+    db(function (con) {
+        var sql = 'select * from followlist where followedid='+userid+';';
+        con.query(sql,function (err,rows) {
+            if(err){
+                console.log(err);
+                return;
+            }
+            var user = [];
+            var l = rows.length;
+            for(var i=0;i<rows.length;i++){
+                byIdGetUser(function(rows,l,res){
+                    user.push(rows[0]);
+                    if(user.length == l){
+                        res.send(user);
+                    }
+                },rows[i].followingid,l,res);
+            }
+        })
+    },'blog');
+}
+function byIdGetUser(cb,id,l,res) {
+    db(function (con) {
+        var sql = 'select * from user where id='+id+';';
+        con.query(sql,function (err,rows) {
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log("!!!!!!!!!!");
+            console.log(rows);
+            cb(rows,l,res);
         });
     },'blog');
 }

@@ -52,6 +52,9 @@ router.get('/sourceBaseCamp',function (req,res) {
 router.get('/downloadsource',function(req,res){
     res.render('downloadsource');
 })
+router.get('/search',function (req,res) {
+    res.render('search');
+})
 router.get('/download', function (req, res, next) {
     var filepath = req.query.sourcepath;
     var filename = filepath.split("-")[1];
